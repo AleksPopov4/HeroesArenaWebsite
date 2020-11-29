@@ -1,4 +1,7 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
+
+using HeroesArenaWebsite.Data.Models.Forum;
+
 namespace HeroesArenaWebsite.Data.Models
 {
     using System;
@@ -16,6 +19,8 @@ namespace HeroesArenaWebsite.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.BlogPosts = new List<BlogPost>();
+            this.ForumPosts = new List<ForumPost>();
         }
 
         // Audit info
@@ -33,5 +38,9 @@ namespace HeroesArenaWebsite.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual ICollection<BlogPost> BlogPosts { get; set; }
+        public virtual ICollection<ForumPost> ForumPosts { get; set; }
+
     }
 }
