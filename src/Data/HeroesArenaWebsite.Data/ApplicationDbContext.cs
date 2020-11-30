@@ -1,4 +1,6 @@
-﻿namespace HeroesArenaWebsite.Data
+﻿using HeroesArenaWebsite.Data.Models.Forum;
+
+namespace HeroesArenaWebsite.Data
 {
     using System;
     using System.Linq;
@@ -25,6 +27,12 @@
         }
 
         public DbSet<Setting> Settings { get; set; }
+
+        public DbSet<Forum> Forums { get; set; }
+
+        public DbSet<Post> Posts { get; set; }
+
+        public DbSet<PostReply> PostReplies { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
