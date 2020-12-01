@@ -18,9 +18,17 @@ namespace HeroesArenaWebsite.Services.Data
             this.forumsRepository = forumsRepository;
         }
 
-        public Forum GetById(int id)
+        public async Task<Forum> GetById(int id)
         {
-            throw new System.NotImplementedException();
+            var forum = this.forumsRepository.All()
+                .Where(f => f.Id == id)
+                .Include(f => f.Posts)
+                    .ThenInclude(p => p.User)
+                .Include(f => f.Posts)
+                    .ThenInclude(p => p.Replies)
+                        .ThenInclude(r => r.User)
+                .FirstOrDefaultAsync(f => f.Id == id);
+            return await forum;
         }
 
         public IEnumerable<Forum> GetAll()

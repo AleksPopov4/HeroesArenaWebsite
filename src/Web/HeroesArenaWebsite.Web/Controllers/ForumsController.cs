@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HeroesArenaWebsite.Data.Models.Forum;
+﻿using System.Linq;
 using HeroesArenaWebsite.Services.Data;
 using HeroesArenaWebsite.Web.ViewModels.Forum;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +8,7 @@ namespace HeroesArenaWebsite.Web.Controllers
     public class ForumsController : Controller
     {
         private readonly IForumsService forumsService;
+        private readonly IPostService postService;
 
         public ForumsController(IForumsService forumsService)
         {
@@ -32,6 +31,13 @@ namespace HeroesArenaWebsite.Web.Controllers
             };
 
             return this.View(model);
+        }
+
+        public IActionResult Topic(int id)
+        {
+            var forum = this.forumsService.GetById(id);
+            var posts = this.postService.GetFilteredPosts(id);
+            return;
         }
     }
 }

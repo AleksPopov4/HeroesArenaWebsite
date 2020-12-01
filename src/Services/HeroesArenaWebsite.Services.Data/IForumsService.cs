@@ -7,7 +7,7 @@ namespace HeroesArenaWebsite.Services.Data
 {
     public interface IForumsService
     {
-        Forum GetById(int id);
+        Task<Forum> GetById(int id);
 
         IEnumerable<Forum> GetAll();
 
