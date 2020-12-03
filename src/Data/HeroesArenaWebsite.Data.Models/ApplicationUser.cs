@@ -33,5 +33,9 @@ namespace HeroesArenaWebsite.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public int Rating { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

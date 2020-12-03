@@ -18,7 +18,7 @@ namespace HeroesArenaWebsite.Services.Data
             this.forumsRepository = forumsRepository;
         }
 
-        public async Task<Forum> GetById(int id)
+        public Forum GetById(int id)
         {
             var forum = this.forumsRepository.All()
                 .Where(f => f.Id == id)
@@ -27,8 +27,8 @@ namespace HeroesArenaWebsite.Services.Data
                 .Include(f => f.Posts)
                     .ThenInclude(p => p.Replies)
                         .ThenInclude(r => r.User)
-                .FirstOrDefaultAsync(f => f.Id == id);
-            return await forum;
+                .FirstOrDefault(f => f.Id == id);
+            return forum;
         }
 
         public IEnumerable<Forum> GetAll()

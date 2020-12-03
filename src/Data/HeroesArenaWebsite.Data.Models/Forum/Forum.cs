@@ -7,6 +7,11 @@ namespace HeroesArenaWebsite.Data.Models.Forum
 {
     public class Forum : BaseDeletableModel<int>
     {
+        public Forum()
+        {
+            this.Posts = new HashSet<Post>();
+        }
+
         public string Title { get; set; }
 
         public string Description { get; set; }
