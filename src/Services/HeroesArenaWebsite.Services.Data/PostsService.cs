@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HeroesArenaWebsite.Data.Common.Repositories;
 using HeroesArenaWebsite.Data.Models.Forum;
+using Microsoft.EntityFrameworkCore;
 
 namespace HeroesArenaWebsite.Services.Data
 {
@@ -15,10 +16,17 @@ namespace HeroesArenaWebsite.Services.Data
         {
             postsRepository = this.postsRepository;
         }
-
+   
         public Post GetById(int id)
         {
-            throw new NotImplementedException();
+            return this.postsRepository
+                .All()
+                .Where(post => post.Id == id)
+                .Include(post => post.User)
+                .Include(post => post.Replies)
+                .ThenInclude(reply => reply.User)
+                .Include(post => post.Forum)
+                .FirstOrDefault();
         }
 
         public IEnumerable<Post> GetAll()
@@ -35,7 +43,7 @@ namespace HeroesArenaWebsite.Services.Data
         {
             return this.postsRepository
                 .All()
-                .Where(f => f.Forum.Id == forumId);
+                .Where(post => post.Forum.Id == forumId);
         }
 
         public Task Add(Post post)
