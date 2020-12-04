@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HeroesArenaWebsite.Data.Common.Models;
 
 namespace HeroesArenaWebsite.Data.Models.Forum

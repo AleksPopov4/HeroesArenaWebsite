@@ -6,7 +6,7 @@ namespace HeroesArenaWebsite.Services.Data
 {
     public interface IPostsService
     {
-        Task<Post> GetById(int id);
+        Post GetById(int id);
 
         IEnumerable<Post> GetAll();
 

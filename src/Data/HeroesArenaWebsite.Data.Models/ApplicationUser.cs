@@ -34,6 +34,8 @@ namespace HeroesArenaWebsite.Data.Models
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
+        public string ProfileImageUrl { get; set; }
+
         public int Rating { get; set; }
 
         public bool IsActive { get; set; }

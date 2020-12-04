@@ -16,7 +16,7 @@ namespace HeroesArenaWebsite.Services.Data
             postsRepository = this.postsRepository;
         }
 
-        public Task<Post> GetById(int id)
+        public Post GetById(int id)
         {
             throw new NotImplementedException();
         }
