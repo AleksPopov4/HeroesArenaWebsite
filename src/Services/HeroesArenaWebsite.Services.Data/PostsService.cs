@@ -14,19 +14,19 @@ namespace HeroesArenaWebsite.Services.Data
 
         public PostsService(IDeletableEntityRepository<Post> postsRepository)
         {
-            postsRepository = this.postsRepository;
+            this.postsRepository = postsRepository;
         }
-   
+
         public Post GetById(int id)
         {
             return this.postsRepository
                 .All()
-                .Where(post => post.Id == id)
-                .Include(post => post.User)
-                .Include(post => post.Replies)
-                .ThenInclude(reply => reply.User)
-                .Include(post => post.Forum)
-                .FirstOrDefault();
+            .Where(post => post.Id == id)
+            .Include(post => post.User)
+            .Include(post => post.Replies)
+            .ThenInclude(reply => reply.User)
+            .Include(post => post.Forum)
+            .FirstOrDefault();
         }
 
         public IEnumerable<Post> GetAll()

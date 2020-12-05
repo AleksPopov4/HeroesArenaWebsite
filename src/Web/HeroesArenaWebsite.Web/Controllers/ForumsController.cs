@@ -46,9 +46,9 @@ namespace HeroesArenaWebsite.Web.Controllers
 
             if (forum.Posts.Any())
             {
-                var posts = this.postService.GetPostsByForumId(id);
+                //var posts = this.postService.GetPostsByForumId(id);
 
-                var postsListing = posts.Select(post => new PostListingViewModel
+                var postsListing = forum.Posts.Select(post => new PostListingViewModel
                 {
                     Id = post.Id,
                     AuthorId = post.User.Id,

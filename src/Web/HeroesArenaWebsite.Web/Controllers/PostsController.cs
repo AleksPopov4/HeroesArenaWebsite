@@ -44,7 +44,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                Replies = replies,
             };
 
-            return this.View();
+            return this.View(model);
         }
     }
 }
