@@ -13,6 +13,11 @@
             return this.View();
         }
 
+        public IActionResult Forum()
+        {
+            return this.RedirectToAction("Index", "Forums");
+        }
+
         public IActionResult Privacy()
         {
             return this.View();

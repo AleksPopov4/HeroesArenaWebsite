@@ -1,6 +1,6 @@
 ﻿@model HeroesArenaWebsite.Web.ViewModels.Forum.ForumTopicViewModel
 
-<style>
+@*<style>
     table, th, td {
         border: 1px solid black;
     }
@@ -8,7 +8,7 @@
     table {
         width: 100%;
     }
-</style>
+</style>*@
 
 <h1>Welcome to the @Model.Forum.Title forum</h1>
 
@@ -27,16 +27,15 @@
 }
 else
 {
-    <table>
+    <table class ="table table-bordered table-hover">
         <tbody>
             @foreach (var post in Model.Posts)
             {
                 <tr>
                     <td>
                         <a asp-controller="Posts" asp-action="Index" asp-route-id="@post.Id">
-                            <span>Go to post</span>
+                            @post.Title
                         </a>
-                        @post.Title
                     </td>
                     <td>
                         @post.AuthorName
