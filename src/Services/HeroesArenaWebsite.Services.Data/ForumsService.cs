@@ -20,15 +20,14 @@ namespace HeroesArenaWebsite.Services.Data
 
         public Forum GetById(int id)
         {
-            var forum = this.forumsRepository.All()
+            return this.forumsRepository.All()
                 .Where(f => f.Id == id)
                 .Include(f => f.Posts)
                     .ThenInclude(p => p.User)
-                .Include(f => f.Posts)
-                    .ThenInclude(p => p.Replies)
-                        .ThenInclude(r => r.User)
+                //.Include(f => f.Posts)
+                //    .ThenInclude(p => p.Replies)
+                //        .ThenInclude(r => r.User)
                 .FirstOrDefault(f => f.Id == id);
-            return forum;
         }
 
         public IEnumerable<Forum> GetAll()

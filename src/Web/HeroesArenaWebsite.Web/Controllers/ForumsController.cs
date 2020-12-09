@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using HeroesArenaWebsite.Data.Models.Forum;
 using HeroesArenaWebsite.Services.Data;
 using HeroesArenaWebsite.Web.ViewModels.Forum;
@@ -12,9 +13,10 @@ namespace HeroesArenaWebsite.Web.Controllers
         private readonly IForumsService forumsService;
         private readonly IPostsService postService;
 
-        public ForumsController(IForumsService forumsService)
+        public ForumsController(IForumsService forumsService, IPostsService postService)
         {
             this.forumsService = forumsService;
+            this.postService = postService;
         }
 
         public IActionResult Index()
@@ -53,13 +55,14 @@ namespace HeroesArenaWebsite.Web.Controllers
                     Id = post.Id,
                     AuthorId = post.User.Id,
                     AuthorName = post.User.UserName,
-                    AuthorRating = post.User.Rating,
+                    AuthorRating = post.User.Rating,// == null ? 0 : post.User.Rating,
                     Title = post.Title,
                     // todo: invariant culture
                     DatePosted = post.CreatedOn.ToString(),
-                    RepliesCount = post.Replies.Count(),
+                    RepliesCount = post.Replies.Count(),// == null ? 0 : post.Replies.Count(),
                     Forum = this.BuildForumListing(post),
-                });
+                })
+                    .ToList();
 
                 model = new ForumTopicViewModel
                 {

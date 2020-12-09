@@ -58,7 +58,7 @@ namespace HeroesArenaWebsite.Web.Controllers
 
         public IActionResult Create(int forumId)
         {
-            var forum = forumsService.GetById(forumId);
+            var forum = this.forumsService.GetById(forumId);
 
             var model = new CreatePostViewModel
             {

@@ -39,11 +39,15 @@ namespace HeroesArenaWebsite.Services.Data
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Post> GetPostsByForumId(int forumId)
+        public IEnumerable<Post> GetPostsByForumId(int id)
         {
             return this.postsRepository
                 .All()
-                .Where(post => post.Forum.Id == forumId);
+                .Where(post => post.Forum.Id == id)
+                .Include(post => post.User)
+                .Include(post => post.Replies)
+                .ThenInclude(reply => reply.User)
+                .Include(post => post.Forum);
         }
 
         public Task Add(Post post)

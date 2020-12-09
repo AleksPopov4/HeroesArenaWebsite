@@ -6,7 +6,7 @@ namespace HeroesArenaWebsite.Web.ViewModels.Forum
 {
     public class ForumTopicViewModel
     {
-        public ForumListingViewModel Forum{ get; set; }
+        public ForumListingViewModel Forum { get; set; }
 
         public IEnumerable<PostListingViewModel> Posts { get; set; }
     }
