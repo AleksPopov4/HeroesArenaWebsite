@@ -31,7 +31,12 @@ namespace HeroesArenaWebsite.Services.Data
 
         public IEnumerable<Post> GetAll()
         {
-            throw new NotImplementedException();
+            return this.postsRepository
+                .All()
+                .Include(post => post.User)
+                .Include(post => post.Replies)
+                .ThenInclude(reply => reply.User)
+                .Include(post => post.Forum);
         }
 
         public IEnumerable<Post> GetFilteredPosts(string searchQuery)
