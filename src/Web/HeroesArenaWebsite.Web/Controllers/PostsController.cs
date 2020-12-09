@@ -27,14 +27,14 @@ namespace HeroesArenaWebsite.Web.Controllers
         }
 
         public IActionResult Index(int id)
-        {
+         {
             var post = this.postsService.GetById(id);
 
             var replies = post.Replies.Select(reply => new PostReplyViewModel
             {
                 Id = reply.Id,
-                AuthorId = reply.User.Id,
-                AuthorName = reply.User.UserName,
+                AuthorId = reply.User?.Id,
+                AuthorName = reply.User?.UserName,
                 AuthorImageUrl = reply.User.ProfileImageUrl,
                 AuthorRating = reply.User.Rating,
                 CreatedOn = reply.CreatedOn,
@@ -56,9 +56,9 @@ namespace HeroesArenaWebsite.Web.Controllers
             return this.View(model);
         }
 
-        public IActionResult Create(int forumId)
+        public IActionResult Create(int id)
         {
-            var forum = this.forumsService.GetById(forumId);
+            var forum = this.forumsService.GetById(id);
 
             var model = new CreatePostViewModel
             {
@@ -68,7 +68,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                 ForumImageUrl = forum.ImageUrl,
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -87,11 +87,12 @@ namespace HeroesArenaWebsite.Web.Controllers
                 CreatedOn = DateTime.UtcNow,
                 User = user,
                 Forum = forum,
+                IsArchived = false,
             };
 
             await this.postsService.Add(post);
 
-            return this.RedirectToAction("Index", "Posts", post.Id);
+            return this.RedirectToAction("Index", "Posts", new { id = post.Id });
         }
     }
 }

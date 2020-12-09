@@ -1,16 +1,11 @@
 ﻿@model HeroesArenaWebsite.Web.ViewModels.Forum.ForumTopicViewModel
 
-@*<style>
-    table, th, td {
-        border: 1px solid black;
-    }
-
-    table {
-        width: 100%;
-    }
-</style>*@
-
 <h1>Welcome to the @Model.Forum.Title forum</h1>
+
+@if (Context.User.Identity.IsAuthenticated)
+{
+    <span id="headingBtn"><a asp-controller="Posts" asp-action="Create" asp-route-id="@Model.Forum.Id" class="btn btn-newPost">Create Post</a></span>
+}
 
 @if (@Model.Posts is null)
 {
@@ -27,7 +22,7 @@
 }
 else
 {
-    <table class ="table table-bordered table-hover">
+    <table class="table table-bordered table-hover">
         <tbody>
             @foreach (var post in Model.Posts)
             {

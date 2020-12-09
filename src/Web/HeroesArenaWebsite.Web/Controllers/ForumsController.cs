@@ -48,8 +48,6 @@ namespace HeroesArenaWebsite.Web.Controllers
 
             if (forum.Posts.Any())
             {
-                //var posts = this.postService.GetPostsByForumId(id);
-
                 var postsListing = forum.Posts.Select(post => new PostListingViewModel
                 {
                     Id = post.Id,

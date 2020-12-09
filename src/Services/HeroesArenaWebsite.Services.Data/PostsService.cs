@@ -50,9 +50,10 @@ namespace HeroesArenaWebsite.Services.Data
                 .Include(post => post.Forum);
         }
 
-        public Task Add(Post post)
+        public async Task Add(Post post)
         {
-            throw new NotImplementedException();
+            await this.postsRepository.AddAsync(post);
+            await this.postsRepository.SaveChangesAsync();
         }
 
         public Task Delete(Post post)
