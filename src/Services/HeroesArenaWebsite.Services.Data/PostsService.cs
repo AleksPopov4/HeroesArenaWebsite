@@ -14,11 +14,10 @@ namespace HeroesArenaWebsite.Services.Data
         private readonly IDeletableEntityRepository<Post> postsRepository;
         private readonly IDeletableEntityRepository<Forum> forumsRepository;
 
-
-
-        public PostsService(IDeletableEntityRepository<Post> postsRepository)
+        public PostsService(IDeletableEntityRepository<Post> postsRepository, IDeletableEntityRepository<Forum> forumsRepository)
         {
             this.postsRepository = postsRepository;
+            this.forumsRepository = forumsRepository;
         }
 
         public Post GetById(int id)

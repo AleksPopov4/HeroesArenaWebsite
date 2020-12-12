@@ -9,6 +9,7 @@ using HeroesArenaWebsite.Web.ViewModels;
 using HeroesArenaWebsite.Web.ViewModels.Post;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace HeroesArenaWebsite.Web.Controllers
 {
@@ -16,18 +17,20 @@ namespace HeroesArenaWebsite.Web.Controllers
     {
         private readonly IPostsService postsService;
         private readonly IForumsService forumsService;
+        private readonly ApplicationUser userService;
 
         private readonly UserManager<ApplicationUser> userManager;
 
-        public PostsController(IPostsService postsService, IForumsService forumsService, UserManager<ApplicationUser> userManager)
+        public PostsController(IPostsService postsService, IForumsService forumsService, UserManager<ApplicationUser> userManager, ApplicationUser userService)
         {
             this.postsService = postsService;
             this.forumsService = forumsService;
             this.userManager = userManager;
+            this.userService = userService;
         }
 
         public IActionResult Index(int id)
-         {
+        {
             var post = this.postsService.GetById(id);
 
             var replies = post.Replies.Select(reply => new PostReplyViewModel
@@ -35,16 +38,17 @@ namespace HeroesArenaWebsite.Web.Controllers
                 Id = reply.Id,
                 AuthorId = reply.User?.Id,
                 AuthorName = reply.User?.UserName,
-                AuthorImageUrl = reply.User.ProfileImageUrl,
+                AuthorImageUrl = reply.User?.ProfileImageUrl,
                 AuthorRating = reply.User.Rating,
                 CreatedOn = reply.CreatedOn,
                 ReplyContent = reply.Content,
                 IsAuthorAdmin = this.userManager.GetRolesAsync(post.User).Result.Contains("Admin"),
-            });
+            }).OrderBy(reply => reply.CreatedOn);
 
             var model = new PostIndexViewModel
             {
                Id = post.Id,
+               Title = post.Title,
                AuthorId = post.User.Id,
                AuthorName = post.User.UserName,
                AuthorImageUrl = post.User.ProfileImageUrl,
@@ -97,6 +101,34 @@ namespace HeroesArenaWebsite.Web.Controllers
             await this.postsService.Add(post);
 
             return this.RedirectToAction("Index", "Posts", new { id = post.Id });
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var post = this.postsService.GetById(id);
+            var model = new DeletePostViewModel
+            {
+                PostId = post.Id,
+                PostAuthor = post.User.UserName,
+                PostContent = post.Content,
+            };
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmDelete(int id)
+        {
+            var post = this.postsService.GetById(id);
+            this.postsService.Delete(id);
+
+            return this.RedirectToAction("Index", "Forums", new {id = post.Forum.Id});
+        }
+
+        public bool IsAuthorAdmin(ApplicationUser user)
+        {
+            return this.userManager.GetRolesAsync(user)
+                .Result.Contains("Admin");
         }
     }
 }

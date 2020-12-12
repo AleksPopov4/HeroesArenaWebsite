@@ -23,6 +23,8 @@ namespace HeroesArenaWebsite.Services.Data
 
         Task Archive(int id);
 
+        Task Delete(int id);
+
         Task EditPost(int id, string newContent);
 
         string GetForumImageUrl(int id);

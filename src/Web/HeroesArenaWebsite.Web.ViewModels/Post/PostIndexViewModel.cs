@@ -23,7 +23,7 @@ namespace HeroesArenaWebsite.Web.ViewModels.Post
         public string PostContent { get; set; }
 
         public bool IsAuthorAdmin { get; set; }
-         
+
         public int ForumId { get; set; }
 
         public string ForumName { get; set; }
