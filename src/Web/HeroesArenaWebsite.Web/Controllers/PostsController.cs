@@ -39,6 +39,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                 AuthorRating = reply.User.Rating,
                 CreatedOn = reply.CreatedOn,
                 ReplyContent = reply.Content,
+                IsAuthorAdmin = this.userManager.GetRolesAsync(post.User).Result.Contains("Admin"),
             });
 
             var model = new PostIndexViewModel
@@ -50,6 +51,9 @@ namespace HeroesArenaWebsite.Web.Controllers
                AuthorRating = post.User.Rating,
                CreatedOn = post.CreatedOn,
                PostContent = post.Content,
+               ForumId = post.Forum.Id,
+               ForumName = post.Forum.Title,
+               IsAuthorAdmin = this.userManager.GetRolesAsync(post.User).Result.Contains("Admin"),
                Replies = replies,
             };
 

@@ -41,7 +41,15 @@ namespace HeroesArenaWebsite.Services.Data
 
         public IEnumerable<Post> GetFilteredPosts(string searchQuery)
         {
-            throw new NotImplementedException();
+            var searchQueryToLower = searchQuery.ToLower();
+
+            return this.postsRepository.All()
+                .Include(post => post.Forum)
+                .Include(post => post.User)
+                .Include(post => post.Replies)
+                .Where(post =>
+                    post.Title.ToLower().Contains(searchQueryToLower)
+                    || post.Content.ToLower().Contains(searchQueryToLower));
         }
 
         public IEnumerable<Post> GetPostsByForumId(int id)

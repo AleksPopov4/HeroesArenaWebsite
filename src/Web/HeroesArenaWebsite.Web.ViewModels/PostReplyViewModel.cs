@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace HeroesArenaWebsite.Web.ViewModels
 {
@@ -21,6 +19,8 @@ namespace HeroesArenaWebsite.Web.ViewModels
         public DateTime CreatedOn { get; set; }
 
         public string ReplyContent { get; set; }
+
+        public bool IsAuthorAdmin { get; set; }
 
         public int PostId { get; set; }
     }
