@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HeroesArenaWebsite.Data.Common.Repositories;
+using HeroesArenaWebsite.Data.Models;
 using HeroesArenaWebsite.Data.Models.Forum;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,9 @@ namespace HeroesArenaWebsite.Services.Data
     public class PostsService : IPostsService
     {
         private readonly IDeletableEntityRepository<Post> postsRepository;
+        private readonly IDeletableEntityRepository<Forum> forumsRepository;
+
+
 
         public PostsService(IDeletableEntityRepository<Post> postsRepository)
         {
@@ -39,6 +43,14 @@ namespace HeroesArenaWebsite.Services.Data
                 .Include(post => post.Forum);
         }
 
+        // todo: find a better way
+        public IEnumerable<Post> GetPostsByUserId(int id)
+        {
+            return this.postsRepository
+                .All()
+                .Where(post => post.User.Id == id.ToString());
+        }
+
         public IEnumerable<Post> GetFilteredPosts(string searchQuery)
         {
             var searchQueryToLower = searchQuery.ToLower();
@@ -54,13 +66,28 @@ namespace HeroesArenaWebsite.Services.Data
 
         public IEnumerable<Post> GetPostsByForumId(int id)
         {
-            return this.postsRepository
-                .All()
-                .Where(post => post.Forum.Id == id)
-                .Include(post => post.User)
-                .Include(post => post.Replies)
-                .ThenInclude(reply => reply.User)
-                .Include(post => post.Forum);
+            return this.forumsRepository.All()
+                .First(forum => forum.Id == id)
+                .Posts;
+        }
+
+        public IEnumerable<ApplicationUser> GetAllUsers(IEnumerable<Post> posts)
+        {
+           var users = new List<ApplicationUser>();
+
+           foreach (var post in posts)
+           {
+               users.Add(post.User);
+
+               if (!post.Replies.Any())
+               {
+                   continue;
+               }
+
+               users.AddRange(post.Replies.Select(reply => reply.User));
+           }
+
+           return users.Distinct();
         }
 
         public async Task Add(Post post)
@@ -69,14 +96,36 @@ namespace HeroesArenaWebsite.Services.Data
             await this.postsRepository.SaveChangesAsync();
         }
 
-        public Task Delete(Post post)
+        public async Task Archive(int id)
         {
-            throw new NotImplementedException();
+            var post = this.GetById(id);
+            post.IsArchived = true;
+            this.postsRepository.Update(post);
+
+            await this.postsRepository.SaveChangesAsync();
         }
 
-        public Task EditPost(int id, string newContent)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var post = this.GetById(id);
+            this.postsRepository.Delete(post);
+
+            await this.postsRepository.SaveChangesAsync();
+        }
+
+        public async Task EditPost(int id, string newContent)
+        {
+            var post = this.GetById(id);
+            post.Content = newContent;
+            this.postsRepository.Update(post);
+
+            await this.postsRepository.SaveChangesAsync();
+        }
+
+        public string GetForumImageUrl(int id)
+        {
+            var post = this.GetById(id);
+            return post.Forum.ImageUrl;
         }
     }
 }
