@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using HeroesArenaWebsite.Data.Models;
 using HeroesArenaWebsite.Data.Models.Forum;
@@ -11,14 +12,26 @@ namespace HeroesArenaWebsite.Services.Data
 
         IEnumerable<Forum> GetAll();
 
-        IEnumerable<ApplicationUser> GetAllActiveUsers();
+        IEnumerable<ApplicationUser> GetActiveUsers(int forumId);
 
-        Task Create(Forum forum);
+        IEnumerable<Post> GetFilteredPosts(string searchQuery);
 
-        Task Delete(int forumId);
+        IEnumerable<Post> GetFilteredPosts(int forumId, string searchQuery);
 
-        Task UpdateForumTitle(int forumId, string newTitle);
+        Post GetLatestPost(int forumId);
 
-        Task UpdateForumDescription(int forumId, string newDescription);
+        bool HasRecentPost(int id);
+
+        Task Add(Forum forum);
+
+        //Task Create(Forum forum);
+
+        Task Delete(int id);
+
+        Task SetForumImage(int id, Uri uri);
+
+        Task UpdateForumTitle(int id, string newTitle);
+
+        Task UpdateForumDescription(int id, string newDescription);
     }
 }

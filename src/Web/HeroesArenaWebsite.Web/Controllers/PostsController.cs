@@ -103,6 +103,20 @@ namespace HeroesArenaWebsite.Web.Controllers
             return this.RedirectToAction("Index", "Posts", new { id = post.Id });
         }
 
+        public IActionResult Edit(int postId)
+        {
+            var post = this.postsService.GetById(postId);
+
+            var model = new CreatePostViewModel
+            {
+                Title = post.Title,
+                Content = post.Content,
+                CreatedOn = post.CreatedOn,
+            };
+
+            return this.View(model);
+        }
+
         public IActionResult Delete(int id)
         {
             var post = this.postsService.GetById(id);
