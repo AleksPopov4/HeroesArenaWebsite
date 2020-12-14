@@ -1,4 +1,7 @@
-﻿namespace HeroesArenaWebsite.Web.ViewModels.Forum
+﻿using System.Collections.Generic;
+using HeroesArenaWebsite.Web.ViewModels.Post;
+
+namespace HeroesArenaWebsite.Web.ViewModels.Forum
 {
     public class ForumListingViewModel
     {
@@ -9,5 +12,15 @@
         public string Description { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public int NumberOfPosts { get; set; }
+
+        public int NumberOfUsers { get; set; }
+
+        public bool HasRecentPost { get; set; }
+
+        public PostListingViewModel Latest { get; set; }
+
+        public IEnumerable<PostListingViewModel> AllPosts { get; set; }
     }
 }

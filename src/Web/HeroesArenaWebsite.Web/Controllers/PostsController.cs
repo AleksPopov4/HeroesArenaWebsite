@@ -57,7 +57,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                PostContent = post.Content,
                ForumId = post.Forum.Id,
                ForumName = post.Forum.Title,
-               IsAuthorAdmin = this.userManager.GetRolesAsync(post.User).Result.Contains("Admin"),
+               IsAuthorAdmin = this.IsAuthorAdmin(post.User), //this.userManager.GetRolesAsync(post.User).Result.Contains("Admin"),
                Replies = replies,
             };
 

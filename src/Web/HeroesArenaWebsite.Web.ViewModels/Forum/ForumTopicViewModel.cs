@@ -9,5 +9,9 @@ namespace HeroesArenaWebsite.Web.ViewModels.Forum
         public ForumListingViewModel Forum { get; set; }
 
         public IEnumerable<PostListingViewModel> Posts { get; set; }
+
+        public string SearchQuery { get; set; }
+
+        public bool EmptySearchResults { get; set; }
     }
 }
