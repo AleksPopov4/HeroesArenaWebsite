@@ -62,7 +62,7 @@ namespace HeroesArenaWebsite.Web.Controllers
             {
                 Forum = this.BuildForumListing(forum),
                 SearchQuery = searchQuery,
-                EmptySearchResults = noResults,
+                //EmptySearchResults = noResults,
             };
 
             if (forum.Posts.Any())
@@ -86,7 +86,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                     Posts = postsListing,
                     Forum = this.BuildForumListing(forum),
                     SearchQuery = searchQuery,
-                    EmptySearchResults = noResults,
+                    //EmptySearchResults = noResults,
                 };
             }
 
