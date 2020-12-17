@@ -9,7 +9,7 @@ using HeroesArenaWebsite.Services.Data;
 
 namespace HeroesArenaWebsite.Web.Controllers
 {
-    public class ApplicationUsersService : IApplicationUser
+    public class ApplicationUsersService : IApplicationUsersService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
 

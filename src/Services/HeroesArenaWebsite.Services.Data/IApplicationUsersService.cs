@@ -5,7 +5,7 @@ using HeroesArenaWebsite.Data.Models;
 
 namespace HeroesArenaWebsite.Services.Data
 {
-    public interface IApplicationUser
+    public interface IApplicationUsersService
     {
         ApplicationUser GetById(string id);
 

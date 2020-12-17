@@ -13,6 +13,8 @@ namespace HeroesArenaWebsite.Services.Data
     {
         private readonly IDeletableEntityRepository<Post> postsRepository;
         private readonly IDeletableEntityRepository<Forum> forumsRepository;
+        private readonly IDeletableEntityRepository<PostReply> postReplyRepository;
+
 
         public PostsService(IDeletableEntityRepository<Post> postsRepository, IDeletableEntityRepository<Forum> forumsRepository)
         {
@@ -72,27 +74,33 @@ namespace HeroesArenaWebsite.Services.Data
 
         public IEnumerable<ApplicationUser> GetAllUsers(IEnumerable<Post> posts)
         {
-           var users = new List<ApplicationUser>();
+            var users = new List<ApplicationUser>();
 
-           foreach (var post in posts)
-           {
-               users.Add(post.User);
+            foreach (var post in posts)
+            {
+                users.Add(post.User);
 
-               if (!post.Replies.Any())
-               {
-                   continue;
-               }
+                if (!post.Replies.Any())
+                {
+                    continue;
+                }
 
-               users.AddRange(post.Replies.Select(reply => reply.User));
-           }
+                users.AddRange(post.Replies.Select(reply => reply.User));
+            }
 
-           return users.Distinct();
+            return users.Distinct();
         }
 
         public async Task Add(Post post)
         {
             await this.postsRepository.AddAsync(post);
             await this.postsRepository.SaveChangesAsync();
+        }
+
+        public async Task AddReply(PostReply reply)
+        {
+            await this.postReplyRepository.AddAsync(reply);
+            await this.postReplyRepository.SaveChangesAsync();
         }
 
         public async Task Archive(int id)
