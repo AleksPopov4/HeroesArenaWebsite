@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using HeroesArenaWebsite.Data.Models.Forum;
@@ -13,12 +12,10 @@ namespace HeroesArenaWebsite.Web.Controllers
     public class ForumsController : Controller
     {
         private readonly IForumsService forumsService;
-        private readonly IPostsService postsService;
 
-        public ForumsController(IForumsService forumsService, IPostsService postsService)
+        public ForumsController(IForumsService forumsService)
         {
             this.forumsService = forumsService;
-            this.postsService = postsService;
         }
 
         public IActionResult Index()
@@ -57,12 +54,13 @@ namespace HeroesArenaWebsite.Web.Controllers
         {
             var forum = this.forumsService.GetById(id);
             var posts = this.forumsService.GetFilteredPosts(id, searchQuery).ToList();
+            var noResults = !string.IsNullOrEmpty(searchQuery) && !posts.Any();
 
             var model = new ForumTopicViewModel
             {
                 Forum = this.BuildForumListing(forum),
                 SearchQuery = searchQuery,
-                //EmptySearchResults = noResults,
+                EmptySearchResults = noResults,
             };
 
             if (forum.Posts.Any())
@@ -86,7 +84,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                     Posts = postsListing,
                     Forum = this.BuildForumListing(forum),
                     SearchQuery = searchQuery,
-                    //EmptySearchResults = noResults,
+                    EmptySearchResults = noResults,
                 };
             }
 
@@ -108,6 +106,12 @@ namespace HeroesArenaWebsite.Web.Controllers
             }
 
             return new PostListingViewModel();
+        }
+
+        public IActionResult Create()
+        {
+            var model = new AddForumModel();
+            return this.View(model);
         }
 
         private ForumListingViewModel BuildForumListing(Post post)

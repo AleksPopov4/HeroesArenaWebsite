@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using HeroesArenaWebsite.Web.ViewModels.Post;
 
-namespace HeroesArenaWebsite.Web.ViewModels.Forum
+namespace HeroesArenaWebsite.Web.ViewModels
 {
-    public class ForumTopicViewModel
+    public class SearchResultViewModel
     {
-        public ForumListingViewModel Forum { get; set; }
-
         public IEnumerable<PostListingViewModel> Posts { get; set; }
 
         public string SearchQuery { get; set; }

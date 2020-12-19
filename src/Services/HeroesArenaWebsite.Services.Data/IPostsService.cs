@@ -21,6 +21,8 @@ namespace HeroesArenaWebsite.Services.Data
 
         Task Add(Post post);
 
+        Task AddReply(PostReply reply);
+
         Task Archive(int id);
 
         Task Delete(int id);

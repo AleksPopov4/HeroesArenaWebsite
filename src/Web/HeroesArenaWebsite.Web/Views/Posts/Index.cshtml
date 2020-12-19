@@ -50,11 +50,11 @@
                     <a asp-controller="Profile" asp-action="Detail" asp-route-id="@reply.AuthorId">
                         <strong>@reply.AuthorName</strong>
                     </a> (<span class="postAuthorRating">@reply.AuthorRating</span>) <br />
-                    @if (@reply.IsAuthorAdmin)
+                    @*@if (@reply.IsAuthorAdmin)
                     {
                         <div class="isAdmin profileLabel smaller">Admin</div>
                         <br />
-                    }
+                    }*@
                     <span class="postDate">@reply.CreatedOn</span>
                 </div>
                 <div class="col-md-9 replyContentContainer">

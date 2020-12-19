@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using HeroesArenaWebsite.Data.Common.Repositories;
 using HeroesArenaWebsite.Data.Models;
 using HeroesArenaWebsite.Data.Models.Forum;
 using HeroesArenaWebsite.Services.Data;
@@ -9,7 +8,6 @@ using HeroesArenaWebsite.Web.ViewModels;
 using HeroesArenaWebsite.Web.ViewModels.Post;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace HeroesArenaWebsite.Web.Controllers
 {
@@ -17,16 +15,16 @@ namespace HeroesArenaWebsite.Web.Controllers
     {
         private readonly IPostsService postsService;
         private readonly IForumsService forumsService;
-        private readonly ApplicationUser userService;
+        //private readonly ApplicationUser userService;
 
         private readonly UserManager<ApplicationUser> userManager;
 
-        public PostsController(IPostsService postsService, IForumsService forumsService, UserManager<ApplicationUser> userManager, ApplicationUser userService)
+        public PostsController(IPostsService postsService, IForumsService forumsService, UserManager<ApplicationUser> userManager)
         {
             this.postsService = postsService;
             this.forumsService = forumsService;
             this.userManager = userManager;
-            this.userService = userService;
+            //this.userService = userService;
         }
 
         public IActionResult Index(int id)
@@ -42,7 +40,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                 AuthorRating = reply.User.Rating,
                 CreatedOn = reply.CreatedOn,
                 ReplyContent = reply.Content,
-                IsAuthorAdmin = this.userManager.GetRolesAsync(post.User).Result.Contains("Admin"),
+                //IsAuthorAdmin = this.userManager.GetRolesAsync(post.User).Result.Contains("Admin"),
             }).OrderBy(reply => reply.CreatedOn);
 
             var model = new PostIndexViewModel

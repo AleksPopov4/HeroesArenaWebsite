@@ -49,8 +49,9 @@ namespace HeroesArenaWebsite.Web.Controllers
                 ForumId = forum.Id,
                 ForumTitle = forum.Title,
                 ForumImageUrl = forum.ImageUrl,
+                //todo: roles
                 //IsAuthorAdmin = user.    //.Roles.Contains("admin"),
-            }
+            };
 
             return this.View(model);
         }
@@ -58,7 +59,7 @@ namespace HeroesArenaWebsite.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddReply(PostReplyViewModel model)
         {
-            var userId = this.usersManager.GetUserId(User);
+            var userId = this.usersManager.GetUserId(this.User);
             var user = await this.usersManager.FindByIdAsync(userId);
 
             var post = this.postsService.GetById(model.Id);
@@ -70,7 +71,10 @@ namespace HeroesArenaWebsite.Web.Controllers
                 CreatedOn = DateTime.UtcNow,
             };
 
-            //await this.postsService;
+            await this.postsService.AddReply(reply);
+            //await this.userService.
+
+            return this.RedirectToAction("Index", "Posts", new {id = model.PostId});
         }
     }
 }
