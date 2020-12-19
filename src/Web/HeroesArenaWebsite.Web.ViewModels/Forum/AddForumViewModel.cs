@@ -1,6 +1,8 @@
-﻿namespace HeroesArenaWebsite.Web.ViewModels.Forum
+﻿using Microsoft.AspNetCore.Http;
+
+namespace HeroesArenaWebsite.Web.ViewModels.Forum
 {
-    public class AddForumModel
+    public class AddForumViewModel
     {
         public string Title { get; set; }
 

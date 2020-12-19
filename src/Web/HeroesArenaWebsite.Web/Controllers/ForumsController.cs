@@ -110,7 +110,7 @@ namespace HeroesArenaWebsite.Web.Controllers
 
         public IActionResult Create()
         {
-            var model = new AddForumModel();
+            var model = new AddForumViewModel();
             return this.View(model);
         }
 
