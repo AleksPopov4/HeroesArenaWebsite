@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
 
-namespace HeroesArenaWebsite.Web.ViewModels.Forum
+namespace HeroesArenaWebsite.Web.ViewModels.Profile
 {
     public class ProfileViewModel
     {

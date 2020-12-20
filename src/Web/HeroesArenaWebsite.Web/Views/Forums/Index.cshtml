@@ -2,21 +2,6 @@
 
 
 <h1>Forums</h1>
-@*<table class="table table-hover" id="forumIndexTable">
-    <tbody>
-    @foreach (var forum in Model.ForumList)
-    {
-        <tr>
-            <td>
-                <a asp-controller="Forums" asp-action="Topic" asp-route-id="@forum.Id">@forum.Title</a>
-            </td>
-            <td>
-                @forum.Description
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>*@
 
 <div class="container body-content">
         <div class="row sectionHeader">
@@ -27,6 +12,10 @@
                     @if (Context.User.Identity.IsAuthenticated)
                     {
                         <span>You must be a <a asp-area="Identity" asp-page="/Account/Register">registered member</a> to create a new post.</span>
+                    }
+                    @if (Context.User.Identity.IsAuthenticated)
+                    {
+                        <span id="headingBtn"><a asp-controller="Forums" asp-action="Create" class="btn btn-newPost">Create Forum</a></span>
                     }
                 </p>
             </div>

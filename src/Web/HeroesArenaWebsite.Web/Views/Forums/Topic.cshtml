@@ -1,52 +1,6 @@
 ﻿@model HeroesArenaWebsite.Web.ViewModels.Forum.ForumTopicViewModel
 <h1>Welcome to the @Model.Forum.Title forum</h1>
 
-    @*@if (Context.User.Identity.IsAuthenticated)
-    {
-        <span id="headingBtn"><a asp-controller="Posts" asp-action="Create" asp-route-id="@Model.Forum.Id" class="btn btn-newPost">Create Post</a></span>
-    }
-
-    @if (@Model.Posts is null)
-    {
-        <div class="noPosts">
-            <h3>
-                There are no posts in @Model.Forum.Title yet.  <br />
-                Would you like to <a asp-controller="Posts" asp-action="Create" asp-route-id="@Model.Forum.Id">
-                    <span>create</span>
-                </a> the first one?
-
-            </h3>
-        </div>
-
-    }
-    else
-    {
-        <table class="table table-bordered table-hover">
-            <tbody>
-                @foreach (var post in Model.Posts)
-                {
-                    <tr>
-                        <td>
-                            <a asp-controller="Posts" asp-action="Index" asp-route-id="@post.Id">
-                                @post.Title
-                            </a>
-                        </td>
-                        <td>
-                            @post.AuthorName
-                        </td>
-                        <td>
-                            @post.DatePosted
-                        </td>
-                        <td>
-                            @post.RepliesCount
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }*@
-
-
 <div class="container body-content">
     <div class="row sectionHeader">
         <div class="sectionHeading">
@@ -57,9 +11,9 @@
             }
             <form asp-controller="Forums" asp-action="Search" method="post">
                 <div class="searchForm">
-                    <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)">
+                    <input asp-for="SearchQuery" type="text" placeholder="Search here..." class="searchBar" onfocus="clearThis(this)">
                     <button type="submit" class="btn buttonSearch">
-                        <i class="material-icons">search</i>
+                        <i class="material-icons">Search Posts</i>
                     </button>
                 </div>
                 <input asp-for="Forum.Id" name="id" type="hidden" />
@@ -131,7 +85,6 @@
         else if (!@Model.Forum.AllPosts.Any())
         {
             <div class="noPosts">
-                <i class="material-icons md-72">question_answer</i>
                 <h3>
                     It looks like there are no @Model.Forum.Title posts yet. <br />
                     Why not <a asp-controller="Posts" asp-action="Create" asp-route-id="@Model.Forum.Id"><span>create one?</span></a>

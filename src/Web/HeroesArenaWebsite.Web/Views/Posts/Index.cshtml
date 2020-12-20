@@ -15,7 +15,7 @@
     <div class="row" id="postIndexContent">
         <div class="col-md-3 postAuthorContainer">
             <div class="postAuthorImage" style="background-image: url(@Model.AuthorImageUrl); background-size: 100%;"></div>
-            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId">
+            <a asp-controller="Profiles" asp-action="Detail" asp-route-id="@Model.AuthorId">
                 <strong>@Model.AuthorName</strong>
             </a> (<span class="postAuthorRating">@Model.AuthorRating</span>) <br />
             <span class="postDate">@Model.CreatedOn</span>
@@ -35,7 +35,7 @@
     @if (Context.User.Identity.IsAuthenticated)
     {
         <div class="row" id="replyRow">
-            <span><a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">Post Reply</a></span>
+            <span><a asp-controller="PostReplies" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">Post Reply</a></span>
         </div>
     }
 
@@ -47,7 +47,7 @@
             <div class="row replyContent">
                 <div class="col-md-3 replyAuthorContainer">
                     <div class="postAuthorImage" style="background-image: url(@reply.AuthorImageUrl); background-size: 100%;"></div>
-                    <a asp-controller="Profile" asp-action="Detail" asp-route-id="@reply.AuthorId">
+                    <a asp-controller="Profiles" asp-action="Detail" asp-route-id="@reply.AuthorId">
                         <strong>@reply.AuthorName</strong>
                     </a> (<span class="postAuthorRating">@reply.AuthorRating</span>) <br />
                     @*@if (@reply.IsAuthorAdmin)
