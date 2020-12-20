@@ -91,7 +91,7 @@ namespace HeroesArenaWebsite.Services.Data
         {
             const int hoursAgo = 12;
             var window = DateTime.Now.AddHours(-hoursAgo);
-            return GetById(id).Posts.Any(post => post.CreatedOn >= window);
+            return this.GetById(id).Posts.Any(post => post.CreatedOn >= window);
         }
 
         public async Task Add(Forum forum)

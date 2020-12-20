@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using HeroesArenaWebsite.Data.Models.Forum;
 using HeroesArenaWebsite.Services.Data;
 using HeroesArenaWebsite.Web.ViewModels.Forum;
@@ -55,13 +57,7 @@ namespace HeroesArenaWebsite.Web.Controllers
             var forum = this.forumsService.GetById(id);
             var posts = this.forumsService.GetFilteredPosts(id, searchQuery).ToList();
             var noResults = !string.IsNullOrEmpty(searchQuery) && !posts.Any();
-
-            var model = new ForumTopicViewModel
-            {
-                Forum = this.BuildForumListing(forum),
-                SearchQuery = searchQuery,
-                EmptySearchResults = noResults,
-            };
+            ForumTopicViewModel model;
 
             if (forum.Posts.Any())
             {
@@ -86,7 +82,17 @@ namespace HeroesArenaWebsite.Web.Controllers
                     SearchQuery = searchQuery,
                     EmptySearchResults = noResults,
                 };
+
+                return this.View(model);
             }
+
+            model = new ForumTopicViewModel
+            {
+                Posts = new List<PostListingViewModel>(),
+                Forum = this.BuildForumListing(forum),
+                SearchQuery = searchQuery,
+                EmptySearchResults = noResults,
+            };
 
             return this.View(model);
         }
@@ -114,6 +120,26 @@ namespace HeroesArenaWebsite.Web.Controllers
             return this.View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddForum(AddForumViewModel model)
+        {
+
+            var imageUri = string.Empty;
+
+            imageUri = "/images/users/default.png";
+
+            var forum = new Forum
+            {
+                Title = model.Title,
+                Description = model.Description,
+                CreatedOn = DateTime.UtcNow,
+                ImageUrl = imageUri,
+            };
+
+            await this.forumsService.Add(forum);
+            return this.RedirectToAction("Index", "Forums");
+        }
+
         private ForumListingViewModel BuildForumListing(Post post)
         {
             var forum = post.Forum;
@@ -129,6 +155,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                 Title = forum.Title,
                 Description = forum.Description,
                 ImageUrl = forum.ImageUrl,
+                AllPosts = new List<PostListingViewModel>(),
             };
         }
     }
