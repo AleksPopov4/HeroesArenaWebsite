@@ -2,7 +2,7 @@
 
 
 <h1>Forums</h1>
-<table class="table table-hover" id="forumIndexTable">
+@*<table class="table table-hover" id="forumIndexTable">
     <tbody>
     @foreach (var forum in Model.ForumList)
     {
@@ -16,18 +16,17 @@
         </tr>
     }
     </tbody>
-</table>
+</table>*@
 
-@*<div class="container body-content">
+<div class="container body-content">
         <div class="row sectionHeader">
-            <div class="sectionHeading">Browse Forums</div>
             <div class="sectionDescription">
-                <p>Welcome to <strong>Lambda Forums community</strong>. Posts are broadly categorized into separate forums by programming language or area of interest.</p>
+                <p>Welcome to the <strong>Heroes Arena community</strong>. Please post topics in their relevant categories.</p>
                 <p>
                     Please read the Forum Guidelines before creating a new post.
                     @if (Context.User.Identity.IsAuthenticated)
                     {
-                        <span>You must be a <a asp-controller="Account" asp-action="Register">registered member</a> to create a new post.</span>
+                        <span>You must be a <a asp-area="Identity" asp-page="/Account/Register">registered member</a> to create a new post.</span>
                     }
                 </p>
             </div>
@@ -42,7 +41,7 @@
                                 <div class="forumLogo" style="background-image: url(@forum.ImageUrl); background-size:100%"></div>
                                 <div class="forumData">
                                     <div class="forumTitle">
-                                        <a asp-controller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name</a>
+                                        <a asp-controller="Forums" asp-action="Topic" asp-route-id="@forum.Id">@forum.Title</a>
                                     </div>
                                     <div class="forumSubTitle">
                                         @if (forum.HasRecentPost)
@@ -71,4 +70,4 @@
                 </tbody>
             </table>
         </div>
-    </div>*@
+    </div>

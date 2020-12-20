@@ -6,6 +6,7 @@ using HeroesArenaWebsite.Web.ViewModels.Profile;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace HeroesArenaWebsite.Web.Controllers
 {
@@ -14,7 +15,7 @@ namespace HeroesArenaWebsite.Web.Controllers
         private readonly UserManager<ApplicationUser> usersManager;
         private readonly IApplicationUsersService usersService;
 
-        public ProfilesController(UserManager<ApplicationUser> usersManager, ApplicationUsersService usersService)
+        public ProfilesController(UserManager<ApplicationUser> usersManager, IApplicationUsersService usersService)
         {
             this.usersManager = usersManager;
             this.usersService = usersService;
@@ -54,12 +55,20 @@ namespace HeroesArenaWebsite.Web.Controllers
                 UserRating = user.Rating.ToString(),
                 Email = user.Email,
                 ProfileImageUrl = user.ProfileImageUrl,
-                DateJoined = user.MemberSince,
+                DateJoined = user.CreatedOn,
                 IsActive = user.IsActive,
                 IsAdmin = userRoles.Contains("Admin"),
             };
 
             return this.View(model);
+        }
+
+        public IActionResult Deactivate(string userId)
+        {
+            var user = this.usersService.GetById(userId);
+            this.usersService.Deactivate(user);
+
+            return this.RedirectToAction("Index", "Profiles");
         }
     }
 }
