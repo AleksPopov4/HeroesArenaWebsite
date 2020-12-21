@@ -10,15 +10,15 @@ namespace HeroesArenaWebsite.Web.ViewModels.Reply
 
         public string AuthorName { get; set; }
 
-        public int AuthorRating { get; set; }
-
         public string AuthorImageUrl { get; set; }
 
-        public bool IsAuthorAdmin { get; set; }
+        public int AuthorRating { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public string ReplyContent { get; set; }
+
+        public bool IsAuthorAdmin { get; set; }
 
         public int PostId { get; set; }
 
@@ -26,10 +26,11 @@ namespace HeroesArenaWebsite.Web.ViewModels.Reply
 
         public string PostContent { get; set; }
 
-        public string ForumName { get; set; }
-
-        public string ForumImageUrl { get; set; }
 
         public int ForumId { get; set; }
+
+        public string ForumTitle { get; set; }
+
+        public string ForumImageUrl { get; set; }
     }
 }

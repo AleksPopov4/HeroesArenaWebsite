@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using HeroesArenaWebsite.Web.ViewModels.Post;
 
-namespace HeroesArenaWebsite.Web.ViewModels
+namespace HeroesArenaWebsite.Web.ViewModels.Search
 {
     public class SearchResultViewModel
     {

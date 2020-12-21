@@ -70,7 +70,7 @@ namespace HeroesArenaWebsite.Services.Data
             return string.IsNullOrEmpty(searchQuery)
                 ? forum.Posts
                 : forum.Posts.Where(post
-                    => post.Title.Contains(searchQuery) || post.Content.Contains(searchQuery));
+                    => post.Title.ToLower().Contains(searchQuery.ToLower()) || post.Content.ToLower().Contains(searchQuery.ToLower()));
         }
 
         public Post GetLatestPost(int forumId)
@@ -99,12 +99,6 @@ namespace HeroesArenaWebsite.Services.Data
             await this.forumsRepository.AddAsync(forum);
             await this.forumsRepository.SaveChangesAsync();
         }
-
-        //public async Task Create(Forum forum)
-        //{
-        //    await this.forumsRepository.AddAsync(forum);
-        //    await this.forumsRepository.SaveChangesAsync();
-        //}
 
         public async Task Delete(int id)
         {

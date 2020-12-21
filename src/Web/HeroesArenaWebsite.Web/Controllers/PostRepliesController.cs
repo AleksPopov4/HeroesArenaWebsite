@@ -5,6 +5,7 @@ using HeroesArenaWebsite.Data.Models;
 using HeroesArenaWebsite.Data.Models.Forum;
 using HeroesArenaWebsite.Services.Data;
 using HeroesArenaWebsite.Web.ViewModels;
+using HeroesArenaWebsite.Web.ViewModels.Reply;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

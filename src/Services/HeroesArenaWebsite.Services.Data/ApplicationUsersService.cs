@@ -5,13 +5,17 @@ using System.Threading.Tasks;
 using HeroesArenaWebsite.Data.Common.Repositories;
 using HeroesArenaWebsite.Data.Models;
 using HeroesArenaWebsite.Data.Models.Forum;
-using HeroesArenaWebsite.Services.Data;
 
-namespace HeroesArenaWebsite.Web.Controllers
+namespace HeroesArenaWebsite.Services.Data
 {
     public class ApplicationUsersService : IApplicationUsersService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
+
+        public ApplicationUsersService(IDeletableEntityRepository<ApplicationUser> usersRepository)
+        {
+            this.usersRepository = usersRepository;
+        }
 
         public ApplicationUser GetById(string id)
         {

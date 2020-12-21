@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HeroesArenaWebsite.Web.ViewModels.Reply;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace HeroesArenaWebsite.Web.ViewModels.Post

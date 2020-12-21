@@ -4,6 +4,7 @@ using HeroesArenaWebsite.Services.Data;
 using HeroesArenaWebsite.Web.ViewModels;
 using HeroesArenaWebsite.Web.ViewModels.Forum;
 using HeroesArenaWebsite.Web.ViewModels.Post;
+using HeroesArenaWebsite.Web.ViewModels.Search;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 
@@ -20,7 +21,7 @@ namespace HeroesArenaWebsite.Web.Controllers
 
         public IActionResult Results(string searchQuery)
         {
-            var posts = this.postsService.GetFilteredPosts(searchQuery);
+            var posts = this.postsService.GetFilteredPosts(searchQuery).ToList();
             var noResults = !string.IsNullOrEmpty(searchQuery) && !posts.Any();
 
             var postListing = posts.Select(post => new PostListingViewModel
