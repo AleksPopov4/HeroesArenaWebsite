@@ -1,16 +1,25 @@
 ﻿@model HeroesArenaWebsite.Web.ViewModels.Post.PostIndexViewModel
 
-<h1>@Model.Title</h1>
-
 <div class="container body-content">
     <div class="row postHeader">
         <div class="postHeading">
             <span class="postIndexTitle">
                 @Model.Title
             </span>
-            <span id="headingBtn"><a asp-controller="Forums" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-back">Back to @Model.ForumName</a></span>
+            <br /><br />
+            <span id="headingBackBtn">
+                <a asp-controller="Forums" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-back">Back to @Model.ForumName</a>
+            </span>
+            <br /><br />
+            @if (Context.User.Identity.IsAuthenticated)
+            {
+                <div class="row" id="replyRow">
+                    <span><a asp-controller="PostReplies" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">Post Reply</a></span>
+                </div>
+            }
         </div>
     </div>
+
 
     <div class="row" id="postIndexContent">
         <div class="col-md-3 postAuthorContainer">
@@ -31,30 +40,21 @@
         </div>
     </div>
 
-    <div class="row" id="replyDivider"></div>
-    @if (Context.User.Identity.IsAuthenticated)
-    {
-        <div class="row" id="replyRow">
-            <span><a asp-controller="PostReplies" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">Post Reply</a></span>
-        </div>
-    }
-
-
     @if (Model.Replies.Any())
     {
         foreach (var reply in Model.Replies)
         {
-            <div class="row replyContent">
+            <div class="row" id="postReplyIndexContent">
                 <div class="col-md-3 replyAuthorContainer">
                     <div class="postAuthorImage" style="background-image: url(@reply.AuthorImageUrl); background-size: 100%;"></div>
                     <a asp-controller="Profiles" asp-action="Detail" asp-route-id="@reply.AuthorId">
                         <strong>@reply.AuthorName</strong>
                     </a> (<span class="postAuthorRating">@reply.AuthorRating</span>) <br />
                     @*@if (@reply.IsAuthorAdmin)
-                    {
-                        <div class="isAdmin profileLabel smaller">Admin</div>
-                        <br />
-                    }*@
+                        {
+                            <div class="isAdmin profileLabel smaller">Admin</div>
+                            <br />
+                        }*@
                     <span class="postDate">@reply.CreatedOn</span>
                 </div>
                 <div class="col-md-9 replyContentContainer">

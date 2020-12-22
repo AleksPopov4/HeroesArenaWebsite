@@ -1,7 +1,7 @@
 ﻿@model HeroesArenaWebsite.Web.ViewModels.Forum.ForumTopicViewModel
 
 
-<h1 class="forumWelcome">Welcome to the @Model.Forum.Title forum</h1>
+<h1 class="forumWelcome">@Model.Forum.Title</h1>
 
 <form asp-controller="Forums" asp-action="Search" method="post">
     <div>
@@ -15,17 +15,12 @@
 
 <div class="container body-content">
     <div class="row sectionHeader">
-        <div class="sectionHeading">
-            <span id="results">@Model.Forum.Title Forum</span>
-            <br/>
-          
-            
-        </div>
         <div class="sectionDescription">
-            @*<div class="forumLogo" style="background-image: url(@Model.Forum.ImageUrl); background-size:100%"></div>*@
-            <p>Welcome to the <strong>@Model.Forum.Title</strong> forum. Please keep posts friendly and on-topic.</p>
+            <div class="forumLogo" style="background-image: url(@Model.Forum.ImageUrl); background-size:100%"></div>
+            <p>Welcome to the <strong>@Model.Forum.Title</strong> forum.</p>
             <p>
-                Please read the Forum Guidelines before creating a new post.
+                Please keep posts friendly and on-topic and read the Forum Guidelines before creating a new post.
+                <br/>
                 <br/>
                 @if (!Context.User.Identity.IsAuthenticated)
                 {
@@ -93,10 +88,10 @@
         else if (!@Model.Forum.AllPosts.Any())
         {
             <div class="noPosts">
-                <h3>
-                    It looks like there are no @Model.Forum.Title posts yet. <br />
-                    Why not <a asp-controller="Posts" asp-action="Create" asp-route-id="@Model.Forum.Id"><span>create one?</span></a>
-                </h3>
+                <h4>
+                    It looks like there are no posts in @Model.Forum.Title yet. <br />
+                    Why not <a asp-controller="Posts" asp-action="Create" asp-route-id="@Model.Forum.Id"><span>create</span></a> the first one?
+                </h4>
             </div>
         }
     </div>

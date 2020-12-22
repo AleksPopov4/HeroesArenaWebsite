@@ -88,16 +88,17 @@ body {
 .sectionHeading {
     color: white;
     font-size: 1.3em;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     padding: 16px 0 16px 0;
     border-bottom: 1px solid #335;
     margin-bottom: 12px;
 }
 
 .postHeading {
+    position: relative;
     color: white;
     font-size: 1.1em;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     padding: 16px 0 16px 0;
 }
 
@@ -113,7 +114,7 @@ body {
 }*/
 
 .frontPageLearn {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     padding: 12px 0 0 32px;
     height: 360px;
 }
@@ -135,7 +136,7 @@ body {
     padding: 40px 80px 42px 40px;
     border: 1px solid #999;
     background-color: #2569D5;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
 }
 
 
@@ -175,7 +176,7 @@ body {
     background: rgba(0, 0, 0, 0.1);
     padding: 8px;
     border: 0px;
-    height: 2.0em;
+    /*height: 2.0em;*/
     font-size: 1.3em;
     font-family: 'Roboto Mono';
     font-weight: bold;
@@ -196,7 +197,7 @@ body {
 
 /*Post page*/
 .postTitle {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
 }
 
@@ -234,16 +235,17 @@ body {
 .postAuthorContainer {
     padding: 12px;
     color: #444;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     width: 190px;
 }
 
 .postIndexTitle {
-    font-size: 1.4em;
+    font-size: 2em;
+    font-family: 'Roboto', sans-serif;
 }
 
 .postContentContainer {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     color: #222;
     padding: 22px;
     border-left: 1px solid #ddd;
@@ -256,8 +258,9 @@ body {
 }
 
 #postIndexContent {
-    background-color: white;
+    background-color: whitesmoke;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.3);
+    border: 2px solid lightskyblue;
 }
 
 .postHeader {
@@ -276,9 +279,13 @@ body {
     margin-right: 20px;
 }
 
+#headingBackBtn {
+    margin-left: 16px;
+}
+
 /* Custom Buttons */
 .btn-back {
-    background-color: #555;
+    background-color: crimson;
     color: #fff !important;
     transition: ease-in 0.1s;
     border-radius: 0px !important;
@@ -286,8 +293,22 @@ body {
 
     .btn-back:hover {
         transition: ease-in 0.1s;
-        background-color: #1e88e5 !important;
+        background-color: green !important;
     }
+
+.replyAuthorContainer {
+    padding: 12px;
+    color: #444;
+    font-family: 'Roboto', sans-serif;
+    width: 190px;
+}
+
+.replyContentContainer {
+    font-family: 'Roboto', sans-serif;
+    color: #222;
+    padding: 22px;
+    border-left: 1px solid #ddd;
+}
 
 .btn-newReply {
     background-color: #5c6bc0 !important;
@@ -300,6 +321,16 @@ body {
         background-color: #9fa8da !important;
         transition: ease-in 0.1s;
     }
+
+#replyRow {
+    margin-left: 16px;
+}
+
+#postReplyIndexContent {
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.3);
+    border: 2px solid lightskyblue;
+}
 
 .btn-file {
     color: white;
@@ -366,7 +397,7 @@ body {
 }
 
 .forumWelcome {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     font-size: 3em;
     display: flex;
@@ -375,7 +406,7 @@ body {
 }
 
 .forumTitle {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     font-size: 1.1em;
 }
@@ -388,7 +419,7 @@ body {
 
 .forumDescription {
     color: #555;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
 }
 
 .forumLogo {
@@ -420,8 +451,9 @@ body {
 }
 
 .noPosts {
-    text-align: center;
+    text-align: left;
     padding-top: 30px;
+    margin-left: 20px;
     font-family: 'Roboto Mono';
 }
 
@@ -434,14 +466,14 @@ body {
 #userEmailLabel, #userBioLabel, #userCreatedLabel, #userRating, #userActiveLabel {
     display: block;
     color: #444;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     padding-top: 3px;
 }
 
 #userName {
     display: block;
     color: #2569d5;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-size: 1.7em;
 }
 
