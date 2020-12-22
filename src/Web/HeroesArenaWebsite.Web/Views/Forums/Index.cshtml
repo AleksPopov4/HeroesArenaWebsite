@@ -1,61 +1,77 @@
 ﻿@model HeroesArenaWebsite.Web.ViewModels.Forum.ForumIndexViewModel
 
+<h1 class="forumWelcome">Welcome to the Heroes Arena Forums</h1>
 
-<h1>Forums</h1>
+<div>
+    <form asp-controller="Searches" asp-action="Search" method="post">
+        <input asp-for="SearchQuery" type="text" class="Search" placeholder="Search forums..." onfocus="clearThis(this)"/>
+        <button type="submit" class="btn btn-newPost">Submit</button>
+    </form>
+</div>
+<br />
 
 <div class="container body-content">
-        <div class="row sectionHeader">
-            <div class="sectionDescription">
-                <p>Welcome to the <strong>Heroes Arena community</strong>. Please post topics in their relevant categories.</p>
-                <p>
-                    Please read the Forum Guidelines before creating a new post.
-                    @if (Context.User.Identity.IsAuthenticated)
-                    {
-                        <span>You must be a <a asp-area="Identity" asp-page="/Account/Register">registered member</a> to create a new post.</span>
-                    }
-                    @if (Context.User.Identity.IsAuthenticated)
-                    {
-                        <span id="headingBtn"><a asp-controller="Forums" asp-action="Create" class="btn btn-newPost">Create Forum</a></span>
-                    }
-                </p>
-            </div>
-        </div>
-        <div class="row" id="forumIndexContent">
-            <table class="table table-hover" id="forumIndexTable">
-                <tbody>
-                    @foreach (var forum in Model.ForumList)
-                    {
-                        <tr>
-                            <td>
-                                <div class="forumLogo" style="background-image: url(@forum.ImageUrl); background-size:100%"></div>
-                                <div class="forumData">
-                                    <div class="forumTitle">
-                                        <a asp-controller="Forums" asp-action="Topic" asp-route-id="@forum.Id">@forum.Title</a>
-                                    </div>
-                                    <div class="forumSubTitle">
-                                        @if (forum.HasRecentPost)
-                                        {
-                                            <div class="hasRecentPost">Recently active</div>
-                                        }
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="forumPostCount">
-                                    @forum.NumberOfPosts Posts
-                                </div>
-                                <div class="forumMemberCount">
-                                    @forum.NumberOfUsers Users
-                                </div>
-                            </td>
-                            <td>
-                                <div class="forumDescription">
-                                    @forum.Description
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+    <div class="row sectionHeader">
+        <div class="sectionDescription">
+            <p>Welcome to the <strong>Heroes Arena community</strong>.</p>
+            <p>
+                Please post topics in their relevant categories and read the Forum Guidelines before creating a new post.<br />
+                <br/>
+                @if (!Context.User.Identity.IsAuthenticated)
+                {
+                    <span>You must be a <a asp-area="Identity" asp-page="/Account/Register">registered member</a> to create a new post.</span>
+                }
+                @if (Context.User.Identity.IsAuthenticated)
+                {
+                    <span id="headingBtn"><a asp-controller="Forums" asp-action="Create" class="btn btn-newPost">Create Forum</a></span>
+                }
+            </p>
         </div>
     </div>
+    <div class="row" id="forumIndexContent">
+        <table class="table table-hover" id="forumIndexTable">
+            <tbody>
+                @foreach (var forum in Model.ForumList)
+                {
+                    <tr>
+                        <td>
+                            <div class="forumLogo" style="background-image: url(@forum.ImageUrl); background-size:100%"></div>
+                            <div class="forumData">
+                                <div class="forumTitle">
+                                    <a asp-controller="Forums" asp-action="Topic" asp-route-id="@forum.Id">@forum.Title</a>
+                                </div>
+                                <div class="forumSubTitle">
+                                    @if (forum.HasRecentPost)
+                                    {
+                                        <div class="hasRecentPost">Recently active</div>
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="forumPostCount">
+                                @forum.NumberOfPosts Posts
+                            </div>
+                            <div class="forumMemberCount">
+                                @forum.NumberOfUsers Users
+                            </div>
+                        </td>
+                        <td>
+                            <div class="forumDescription">
+                                @forum.Description
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function clearThis(target) {
+            target.value = "";
+        }
+    </script>
+}

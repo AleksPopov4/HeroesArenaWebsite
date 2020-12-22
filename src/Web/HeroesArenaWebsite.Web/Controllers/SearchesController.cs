@@ -1,12 +1,10 @@
 ﻿using System.Globalization;
 using System.Linq;
 using HeroesArenaWebsite.Services.Data;
-using HeroesArenaWebsite.Web.ViewModels;
 using HeroesArenaWebsite.Web.ViewModels.Forum;
 using HeroesArenaWebsite.Web.ViewModels.Post;
 using HeroesArenaWebsite.Web.ViewModels.Search;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace HeroesArenaWebsite.Web.Controllers
 {

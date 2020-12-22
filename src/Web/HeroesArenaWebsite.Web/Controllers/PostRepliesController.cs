@@ -16,15 +16,15 @@ namespace HeroesArenaWebsite.Web.Controllers
     {
         private readonly IForumsService forumsService;
         private readonly IPostsService postsService;
-        private readonly ApplicationUser userService;
+        private readonly IApplicationUsersService usersService;
 
         private readonly UserManager<ApplicationUser> usersManager;
 
-        public PostRepliesController(IForumsService forumsService, IPostsService postsService, ApplicationUser userService, UserManager<ApplicationUser> usersManager)
+        public PostRepliesController(IForumsService forumsService, IPostsService postsService, IApplicationUsersService usersService, UserManager<ApplicationUser> usersManager)
         {
             this.forumsService = forumsService;
             this.postsService = postsService;
-            this.userService = userService;
+            this.usersService = usersService;
             this.usersManager = usersManager;
         }
 
@@ -63,7 +63,7 @@ namespace HeroesArenaWebsite.Web.Controllers
             var userId = this.usersManager.GetUserId(this.User);
             var user = await this.usersManager.FindByIdAsync(userId);
 
-            var post = this.postsService.GetById(model.Id);
+            var post = this.postsService.GetById(model.PostId);
             var reply = new PostReply
             {
                 Post = post,
@@ -75,7 +75,7 @@ namespace HeroesArenaWebsite.Web.Controllers
             await this.postsService.AddReply(reply);
             //await this.userService.
 
-            return this.RedirectToAction("Index", "Posts", new {id = model.PostId});
+            return this.RedirectToAction("Index", "Posts", new { id = model.PostId });
         }
     }
 }

@@ -29,5 +29,11 @@
             return this.View(
                 new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
+
+        [HttpPost]
+        public IActionResult Search(string searchQuery)
+        {
+            return this.RedirectToAction("Search", "Searches", new { searchQuery });
+        }
     }
 }

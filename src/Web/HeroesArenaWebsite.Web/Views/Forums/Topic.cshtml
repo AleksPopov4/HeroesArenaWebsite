@@ -1,36 +1,44 @@
 ﻿@model HeroesArenaWebsite.Web.ViewModels.Forum.ForumTopicViewModel
-<h1>Welcome to the @Model.Forum.Title forum</h1>
+
+
+<h1 class="forumWelcome">Welcome to the @Model.Forum.Title forum</h1>
+
+<form asp-controller="Forums" asp-action="Search" method="post">
+    <div>
+        <input asp-for="SearchQuery" type="text" class="Search" placeholder="Search posts..."  onfocus="clearThis(this)">
+        <button type="submit" class="btn btn-newPost">Submit</button>
+    </div>
+    <input asp-for="Forum.Id" name="id" type="hidden" />
+</form>
+
+<br/>
 
 <div class="container body-content">
     <div class="row sectionHeader">
         <div class="sectionHeading">
             <span id="results">@Model.Forum.Title Forum</span>
-            @if (Context.User.Identity.IsAuthenticated)
-            {
-                <span id="headingBtn"><a asp-controller="Posts" asp-action="Create" asp-route-id="@Model.Forum.Id" class="btn btn-newPost">Create Post</a></span>
-            }
-            <form asp-controller="Forums" asp-action="Search" method="post">
-                <div class="searchForm">
-                    <input asp-for="SearchQuery" type="text" placeholder="Search posts..." class="searchBar" onfocus="clearThis(this)">
-                    <button type="submit" class="btn buttonSearch">
-                        <i class="material-icons">Submit search</i>
-                    </button>
-                </div>
-                <input asp-for="Forum.Id" name="id" type="hidden" />
-            </form>
+            <br/>
+          
+            
         </div>
         <div class="sectionDescription">
-            <div class="forumLogo" style="background-image: url(@Model.Forum.ImageUrl); background-size:100%"></div>
+            @*<div class="forumLogo" style="background-image: url(@Model.Forum.ImageUrl); background-size:100%"></div>*@
             <p>Welcome to the <strong>@Model.Forum.Title</strong> forum. Please keep posts friendly and on-topic.</p>
             <p>
                 Please read the Forum Guidelines before creating a new post.
+                <br/>
                 @if (!Context.User.Identity.IsAuthenticated)
                 {
                     <span>You must be a <a asp-area="Identity" asp-page="/Account/Register">registered member</a> to create a new post.</span>
                 }
+                @if (Context.User.Identity.IsAuthenticated)
+                {
+                    <span id="headingBtn"><a asp-controller="Posts" asp-action="Create" asp-route-id="@Model.Forum.Id" class="btn btn-newPost">Create Post</a></span>
+                }
             </p>
         </div>
     </div>
+
     <div class="row" id="forumIndexContent">
         @if (Model.Posts.Any())
         {

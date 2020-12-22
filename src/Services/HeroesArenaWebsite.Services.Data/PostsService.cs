@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HeroesArenaWebsite.Data.Common.Repositories;
@@ -13,13 +12,13 @@ namespace HeroesArenaWebsite.Services.Data
     {
         private readonly IDeletableEntityRepository<Post> postsRepository;
         private readonly IDeletableEntityRepository<Forum> forumsRepository;
-        private readonly IDeletableEntityRepository<PostReply> postReplyRepository;
+        private readonly IDeletableEntityRepository<PostReply> postRepliesRepository;
 
-
-        public PostsService(IDeletableEntityRepository<Post> postsRepository, IDeletableEntityRepository<Forum> forumsRepository)
+        public PostsService(IDeletableEntityRepository<Post> postsRepository, IDeletableEntityRepository<Forum> forumsRepository, IDeletableEntityRepository<PostReply> postRepliesRepository)
         {
             this.postsRepository = postsRepository;
             this.forumsRepository = forumsRepository;
+            this.postRepliesRepository = postRepliesRepository;
         }
 
         public Post GetById(int id)
@@ -99,8 +98,8 @@ namespace HeroesArenaWebsite.Services.Data
 
         public async Task AddReply(PostReply reply)
         {
-            await this.postReplyRepository.AddAsync(reply);
-            await this.postReplyRepository.SaveChangesAsync();
+            await this.postRepliesRepository.AddAsync(reply);
+            await this.postRepliesRepository.SaveChangesAsync();
         }
 
         public async Task Archive(int id)
