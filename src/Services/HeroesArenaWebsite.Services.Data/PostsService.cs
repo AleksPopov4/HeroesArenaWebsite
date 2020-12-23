@@ -43,7 +43,6 @@ namespace HeroesArenaWebsite.Services.Data
                 .Include(post => post.Forum);
         }
 
-        // todo: find a better way
         public IEnumerable<Post> GetPostsByUserId(int id)
         {
             return this.postsRepository

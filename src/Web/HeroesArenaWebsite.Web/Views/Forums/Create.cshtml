@@ -1,4 +1,4 @@
-﻿@model HeroesArenaWebsite.Web.ViewModels.Forum.AddForumViewModel
+﻿@model HeroesArenaWebsite.Web.ViewModels.Forum.AddForumInputModel
 
 <div class="container body-content">
     <div class="row sectionHeader">
@@ -12,7 +12,7 @@
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Title">Forum Title</label>
-                    <input asp-for="Title" class="form-control" placeholder="Choose a Forum Title" />
+                    <input asp-for="Title" class="form-control" placeholder="Choose a forum title" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
                 <div class="form-group">

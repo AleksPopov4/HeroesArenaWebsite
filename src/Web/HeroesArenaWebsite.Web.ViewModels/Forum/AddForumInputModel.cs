@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace HeroesArenaWebsite.Web.ViewModels.Forum
 {
-    public class AddForumViewModel
+    public class AddForumInputModel
     {
+        [Required]
         public string Title { get; set; }
 
+        [Required]
+        [MaxLength(300)]
         public string Description { get; set; }
 
         public string ImageUrl { get; set; }

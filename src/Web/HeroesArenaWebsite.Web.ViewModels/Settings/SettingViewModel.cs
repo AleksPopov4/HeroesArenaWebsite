@@ -1,7 +1,7 @@
 ﻿namespace HeroesArenaWebsite.Web.ViewModels.Settings
 {
-    using HeroesArenaWebsite.Data.Models;
-    using HeroesArenaWebsite.Services.Mapping;
+    using Data.Models;
+    using Services.Mapping;
 
     using AutoMapper;
 

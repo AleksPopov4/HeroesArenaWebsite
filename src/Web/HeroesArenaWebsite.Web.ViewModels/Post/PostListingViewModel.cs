@@ -1,4 +1,5 @@
-﻿using HeroesArenaWebsite.Web.ViewModels.Forum;
+﻿using System;
+using HeroesArenaWebsite.Web.ViewModels.Forum;
 
 namespace HeroesArenaWebsite.Web.ViewModels.Post
 {
@@ -14,7 +15,6 @@ namespace HeroesArenaWebsite.Web.ViewModels.Post
 
         public string AuthorId { get; set; }
 
-        // TODO: CHANGE TO DATETIME
         public string DatePosted { get; set; }
 
         public ForumListingViewModel Forum { get; set; }

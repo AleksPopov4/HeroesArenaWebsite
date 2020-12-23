@@ -7,6 +7,7 @@ using HeroesArenaWebsite.Services.Data;
 using HeroesArenaWebsite.Web.ViewModels;
 using HeroesArenaWebsite.Web.ViewModels.Post;
 using HeroesArenaWebsite.Web.ViewModels.Reply;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,7 +42,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                 AuthorRating = reply.User.Rating,
                 CreatedOn = reply.CreatedOn,
                 ReplyContent = reply.Content,
-                //IsAuthorAdmin = this.userManager.GetRolesAsync(post.User).Result.Contains("Admin"),
+                IsAuthorAdmin = this.User.IsInRole("Administrator"),
             }).OrderBy(reply => reply.CreatedOn);
 
             var model = new PostIndexViewModel
@@ -56,18 +57,19 @@ namespace HeroesArenaWebsite.Web.Controllers
                PostContent = post.Content,
                ForumId = post.Forum.Id,
                ForumName = post.Forum.Title,
-               IsAuthorAdmin = this.IsAuthorAdmin(post.User), //this.userManager.GetRolesAsync(post.User).Result.Contains("Admin"),
+               IsAuthorAdmin = this.User.IsInRole("Administrator"),
                Replies = replies,
             };
 
             return this.View(model);
         }
 
+        [Authorize]
         public IActionResult Create(int id)
         {
             var forum = this.forumsService.GetById(id);
 
-            var model = new CreatePostViewModel
+            var model = new CreatePostInputModel
             {
                 ForumName = forum.Title,
                 AuthorName = this.User.Identity.Name,
@@ -79,7 +81,8 @@ namespace HeroesArenaWebsite.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPost(CreatePostViewModel model)
+        [Authorize]
+        public async Task<IActionResult> AddPost(CreatePostInputModel model)
         {
             var userId = this.userManager.GetUserId(this.User);
 
@@ -102,11 +105,12 @@ namespace HeroesArenaWebsite.Web.Controllers
             return this.RedirectToAction("Index", "Posts", new { id = post.Id });
         }
 
+        [Authorize]
         public IActionResult Edit(int postId)
         {
             var post = this.postsService.GetById(postId);
 
-            var model = new CreatePostViewModel
+            var model = new CreatePostInputModel
             {
                 Title = post.Title,
                 Content = post.Content,
@@ -116,10 +120,11 @@ namespace HeroesArenaWebsite.Web.Controllers
             return this.View(model);
         }
 
+        [Authorize]
         public IActionResult Delete(int id)
         {
             var post = this.postsService.GetById(id);
-            var model = new DeletePostViewModel
+            var model = new DeletePostModel
             {
                 PostId = post.Id,
                 PostAuthor = post.User.UserName,
@@ -130,6 +135,7 @@ namespace HeroesArenaWebsite.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult ConfirmDelete(int id)
         {
             var post = this.postsService.GetById(id);
@@ -141,7 +147,7 @@ namespace HeroesArenaWebsite.Web.Controllers
         public bool IsAuthorAdmin(ApplicationUser user)
         {
             return this.userManager.GetRolesAsync(user)
-                .Result.Contains("Admin");
+                .Result.Contains("Administrator");
         }
     }
 }

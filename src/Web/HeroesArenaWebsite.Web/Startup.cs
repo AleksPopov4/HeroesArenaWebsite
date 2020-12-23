@@ -1,5 +1,4 @@
-﻿using HeroesArenaWebsite.Web.Controllers;
-
+﻿
 namespace HeroesArenaWebsite.Web
 {
     using System.Reflection;

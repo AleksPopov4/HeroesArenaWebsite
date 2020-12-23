@@ -43,6 +43,7 @@ html {
 
 body {
     /* Margin bottom by footer height */
+    background-image: url('../img/forest03_preview-01.png');
     margin-bottom: 60px;
     padding: 50px 0 20px 0;
     background-color: #EEE;
@@ -490,4 +491,27 @@ body {
     padding-right: 15px;
 }
 
- 
+
+/* Video */
+
+#headerPopup {
+    width: 75%;
+    margin: 0 auto;
+}
+
+#headerPopup iframe {
+    width: 100%;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #ffffff;
+    font-family: 'Raleway',sans-serif;
+    font-size: 62px;
+    font-weight: 800;
+    line-height: 72px;
+    margin: 0 0 24px;
+    text-align: center;
+    text-transform: uppercase;
+}
+

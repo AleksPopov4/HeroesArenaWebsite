@@ -7,6 +7,7 @@ using HeroesArenaWebsite.Data.Models.Forum;
 using HeroesArenaWebsite.Services.Data;
 using HeroesArenaWebsite.Web.ViewModels.Forum;
 using HeroesArenaWebsite.Web.ViewModels.Post;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HeroesArenaWebsite.Web.Controllers
@@ -68,8 +69,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                     AuthorName = post.User.UserName,
                     AuthorRating = post.User.Rating,// == null ? 0 : post.User.Rating,
                     Title = post.Title,
-                    // todo: invariant culture
-                    DatePosted = post.CreatedOn.ToString(),
+                    DatePosted = post.CreatedOn.ToString(CultureInfo.InvariantCulture),
                     RepliesCount = post.Replies.Count(),// == null ? 0 : post.Replies.Count(),
                     Forum = this.BuildForumListing(post),
                 }).OrderByDescending(post => post.DatePosted)
@@ -114,16 +114,17 @@ namespace HeroesArenaWebsite.Web.Controllers
             return new PostListingViewModel();
         }
 
+        [Authorize]
         public IActionResult Create()
         {
-            var model = new AddForumViewModel();
+            var model = new AddForumInputModel();
             return this.View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddForum(AddForumViewModel model)
+        [Authorize]
+        public async Task<IActionResult> AddForum(AddForumInputModel model)
         {
-
             var imageUri = string.Empty;
 
             imageUri = "/images/users/default.png";

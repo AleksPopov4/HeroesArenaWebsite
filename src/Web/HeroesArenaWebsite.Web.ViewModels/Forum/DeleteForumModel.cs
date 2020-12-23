@@ -1,6 +1,6 @@
 ﻿namespace HeroesArenaWebsite.Web.ViewModels.Forum
 {
-    public class DeleteForumViewModel
+    public class DeleteForumModel
     {
         public int ForumId { get; set; }
 

@@ -50,14 +50,14 @@ namespace HeroesArenaWebsite.Web.Controllers
                 ForumId = forum.Id,
                 ForumTitle = forum.Title,
                 ForumImageUrl = forum.ImageUrl,
-                //todo: roles
-                //IsAuthorAdmin = user.    //.Roles.Contains("admin"),
+                IsAuthorAdmin = this.User.IsInRole("Administrator"),
             };
 
             return this.View(model);
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddReply(PostReplyViewModel model)
         {
             var userId = this.usersManager.GetUserId(this.User);
