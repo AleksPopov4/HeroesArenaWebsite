@@ -1,24 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using HeroesArenaWebsite.Data.Models.Forum;
 using HeroesArenaWebsite.Services.Data;
 using HeroesArenaWebsite.Web.ViewModels.Forum;
 using HeroesArenaWebsite.Web.ViewModels.Post;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace HeroesArenaWebsite.Web.Controllers
 {
     public class ForumsController : Controller
     {
         private readonly IForumsService forumsService;
+        private readonly IUploadService uploadService;
+        private readonly IConfiguration configuration;
 
-        public ForumsController(IForumsService forumsService)
+        public ForumsController(IForumsService forumsService, IUploadService uploadService, IConfiguration configuration)
         {
             this.forumsService = forumsService;
+            this.uploadService = uploadService;
+            this.configuration = configuration;
         }
 
         public IActionResult Index()
@@ -125,9 +134,17 @@ namespace HeroesArenaWebsite.Web.Controllers
         [Authorize]
         public async Task<IActionResult> AddForum(AddForumInputModel model)
         {
-            var imageUri = string.Empty;
+            string imageUri;
 
-            imageUri = "/images/users/default.png";
+            if (model.ImageUpload != null)
+            {
+                var blockBlob = this.PostForumImage(model.ImageUpload);
+                imageUri = blockBlob.Uri.AbsoluteUri;
+            }
+            else
+            {
+                imageUri = "../img/icons/default-icon.jpg";
+            }
 
             var forum = new Forum
             {
@@ -139,6 +156,18 @@ namespace HeroesArenaWebsite.Web.Controllers
 
             await this.forumsService.Add(forum);
             return this.RedirectToAction("Index", "Forums");
+        }
+
+        public CloudBlockBlob PostForumImage(IFormFile file)
+        {
+            var connectionString = this.configuration.GetConnectionString("AzureStorageAccountConnectionString");
+            var container = this.uploadService.GetBlobContainer(connectionString);
+            var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+            var filename = Path.Combine(parsedContentDisposition.FileName.ToString().Trim('"'));
+            var blockBlob = container.GetBlockBlobReference(filename);
+            blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+
+            return blockBlob;
         }
 
         private ForumListingViewModel BuildForumListing(Post post)

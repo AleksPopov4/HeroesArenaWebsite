@@ -43,7 +43,7 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    background-image: url('../img/forest03_preview-01.png');
+    background-image: url('../img/main-background-winter.png');
     margin-bottom: 60px;
     padding: 50px 0 20px 0;
     background-color: #EEE;
@@ -462,6 +462,13 @@ body {
 .userProfile {
     padding: 32px 0 64px 24px;
     background-color: #fff;
+}
+
+#userProfileImage {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background-color: #ddd;
 }
 
 #userEmailLabel, #userBioLabel, #userCreatedLabel, #userRating, #userActiveLabel {

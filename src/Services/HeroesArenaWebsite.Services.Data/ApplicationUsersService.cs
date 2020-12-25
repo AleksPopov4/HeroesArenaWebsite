@@ -61,6 +61,7 @@ namespace HeroesArenaWebsite.Services.Data
         public async Task SetProfileImage(string id, Uri uri)
         {
             var user = this.GetById(id);
+            user.ProfileImageUrl = uri.AbsoluteUri;
             user.Rating++;
             this.usersRepository.Update(user);
 

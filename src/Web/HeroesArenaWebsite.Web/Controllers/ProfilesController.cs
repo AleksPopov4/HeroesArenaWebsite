@@ -1,12 +1,17 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using HeroesArenaWebsite.Data.Models;
 using HeroesArenaWebsite.Services.Data;
 using HeroesArenaWebsite.Web.ViewModels.Forum;
 using HeroesArenaWebsite.Web.ViewModels.Profile;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using Microsoft.Extensions.Configuration;
 
 namespace HeroesArenaWebsite.Web.Controllers
 {
@@ -14,11 +19,15 @@ namespace HeroesArenaWebsite.Web.Controllers
     {
         private readonly UserManager<ApplicationUser> usersManager;
         private readonly IApplicationUsersService usersService;
+        private readonly IUploadService uploadService;
+        private readonly IConfiguration configuration;
 
-        public ProfilesController(UserManager<ApplicationUser> usersManager, IApplicationUsersService usersService)
+        public ProfilesController(UserManager<ApplicationUser> usersManager, IApplicationUsersService usersService,  IUploadService uploadService, IConfiguration configuration)
         {
             this.usersManager = usersManager;
             this.usersService = usersService;
+            this.uploadService = uploadService;
+            this.configuration = configuration;
         }
 
         public IActionResult Index()
@@ -63,6 +72,26 @@ namespace HeroesArenaWebsite.Web.Controllers
             return this.View(model);
         }
 
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> UploadProfileImage(IFormFile file)
+        {
+            var userId = this.usersManager.GetUserId(this.User);
+            var connectionString = this.configuration.GetConnectionString("AzureStorageAccountConnectionString");
+            var container = this.uploadService.GetBlobContainer(connectionString);
+
+            var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+            var filename = Path.Combine(parsedContentDisposition.FileName.Trim('"'));
+
+            var blockBlob = container.GetBlockBlobReference(filename);
+
+            await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+            await this.usersService.SetProfileImage(userId, blockBlob.Uri);
+
+            return this.RedirectToAction("Detail", "Profiles", new { id = userId });
+        }
+
+        [Authorize]
         public IActionResult Deactivate(string userId)
         {
             var user = this.usersService.GetById(userId);

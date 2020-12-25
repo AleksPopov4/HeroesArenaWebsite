@@ -1,5 +1,4 @@
-﻿
-namespace HeroesArenaWebsite.Web
+﻿namespace HeroesArenaWebsite.Web
 {
     using System.Reflection;
 
@@ -70,6 +69,7 @@ namespace HeroesArenaWebsite.Web
             services.AddScoped<IPostsService, PostsService>();
             services.AddScoped<IPostRepliesService, PostRepliesService>();
             services.AddScoped<IApplicationUsersService, ApplicationUsersService>();
+            services.AddScoped<IUploadService, UploadService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
