@@ -184,7 +184,8 @@ body {
 .Search {
     width: 25%;
     margin-top: 8px;
-    background: rgba(0, 0, 0, 0.1);
+    background:snow;
+    /*background-color: rgba(137, 196, 244, 1);*/
     padding: 8px;
     border: 0px;
     /*height: 2.0em;*/
@@ -198,7 +199,7 @@ body {
         border: none !important;
         outline: none !important;
         transition: ease-in 0.2s;
-        color: black;
+        color:snow;
         width: 45%;
         /*color: #03A9F4;*/
         background-color: rgba(0, 0, 0, 0.7);
@@ -549,4 +550,11 @@ h1 {
 
 .smaller {
     font-size: 0.8em;
+}
+
+.privacyBodyBackground {
+    background-color: #00afcf;
+    padding: 24px;
+    margin: auto;
+    border-bottom: 1px solid #335;
 }
