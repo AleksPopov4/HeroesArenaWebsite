@@ -138,7 +138,7 @@ namespace HeroesArenaWebsite.Web.Controllers
 
             if (model.ImageUpload != null)
             {
-                var blockBlob = this.PostForumImage(model.ImageUpload);
+                var blockBlob = await this.PostForumImage(model.ImageUpload);
                 imageUri = blockBlob.Uri.AbsoluteUri;
             }
             else
@@ -158,14 +158,16 @@ namespace HeroesArenaWebsite.Web.Controllers
             return this.RedirectToAction("Index", "Forums");
         }
 
-        public CloudBlockBlob PostForumImage(IFormFile file)
+        private async Task<CloudBlockBlob> PostForumImage(IFormFile file)
         {
             var connectionString = this.configuration.GetConnectionString("AzureStorageAccountConnectionString");
             var container = this.uploadService.GetBlobContainer(connectionString);
+
             var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-            var filename = Path.Combine(parsedContentDisposition.FileName.ToString().Trim('"'));
+            var filename = Path.Combine(parsedContentDisposition.FileName.Trim('"'));
+
             var blockBlob = container.GetBlockBlobReference(filename);
-            blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+            await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
 
             return blockBlob;
         }
