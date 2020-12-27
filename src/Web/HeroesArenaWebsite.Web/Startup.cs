@@ -1,4 +1,8 @@
-﻿namespace HeroesArenaWebsite.Web
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+
+namespace HeroesArenaWebsite.Web
 {
     using System.Reflection;
 
@@ -73,7 +77,7 @@
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
@@ -112,6 +116,45 @@
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
+            this.CreateRoles(serviceProvider);
+        }
+
+        private void CreateRoles(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            Task<IdentityResult> roleResult;
+            string email = "popov.aleks@yahoo.com";
+
+            //Check that there is an Administrator role and create if not
+            Task<bool> hasAdminRole = roleManager.RoleExistsAsync("Administrator");
+            hasAdminRole.Wait();
+
+            if (!hasAdminRole.Result)
+            {
+                roleResult = roleManager.CreateAsync(new ApplicationRole("Administrator"));
+                roleResult.Wait();
+            }
+
+            //Check if the admin user exists and create it if not
+            //Add to the Administrator role
+
+            Task<ApplicationUser> testUser = userManager.FindByEmailAsync(email);
+            testUser.Wait();
+
+            if (testUser.Result == null)
+            {
+                ApplicationUser administrator = new ApplicationUser { Email = "popov.aleks@yahoo.com", UserName = "popov.aleks@yahoo.com" };
+
+                Task<IdentityResult> newUser = userManager.CreateAsync(administrator, "adminadmin");
+                newUser.Wait();
+
+                if (newUser.Result.Succeeded)
+                {
+                    Task<IdentityResult> newUserRole = userManager.AddToRoleAsync(administrator, "Administrator");
+                    newUserRole.Wait();
+                }
+            }
         }
     }
 }

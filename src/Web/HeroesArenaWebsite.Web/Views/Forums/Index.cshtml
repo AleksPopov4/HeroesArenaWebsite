@@ -63,6 +63,19 @@
                                 @forum.Description
                             </div>
                         </td>
+                        <td>
+                            @if (Context.User.Identity.IsAuthenticated)//IsInRole("Administrator")
+                            {
+                                <button asp-page-handler="Delete" asp-route-id="@forum.Id" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</button>
+                                @*<a asp-controller="Forums" asp-action="Delete" asp-route-id="@forum.Id" class="btn btn-newPost">Delete Forum</a>*@
+                                @*<form method="post" asp-controller="Forums" asp-action="Delete" asp-route-id="@forum.Id">
+            </form>
+            <button type="submit" class="btn btn-newPost">Delete</button>*@
+                                @*<form asp-controller="Forums" asp-action="Delete" asp-route-id="@forum.Id" method="post">*@
+                                @*<button asp-route-id="@forum.Id" type="submit" class="btn btn-primary">Delete Forum</button>*@
+                                @*</form>*@
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>

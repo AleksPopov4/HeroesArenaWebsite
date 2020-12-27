@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using HeroesArenaWebsite.Data.Common.Repositories;
 using HeroesArenaWebsite.Data.Models;
 using HeroesArenaWebsite.Data.Models.Forum;
-using HeroesArenaWebsite.Services.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace HeroesArenaWebsite.Services.Data
@@ -100,9 +99,9 @@ namespace HeroesArenaWebsite.Services.Data
             await this.forumsRepository.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var forum = this.GetById(id);
+            var forum = this.forumsRepository.All().FirstOrDefault(x => x.Id == id);
             this.forumsRepository.Delete(forum);
 
             await this.forumsRepository.SaveChangesAsync();

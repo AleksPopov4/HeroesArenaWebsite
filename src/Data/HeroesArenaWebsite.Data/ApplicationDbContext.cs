@@ -78,7 +78,7 @@ namespace HeroesArenaWebsite.Data
                 .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
             foreach (var foreignKey in foreignKeys)
             {
-                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+                foreignKey.DeleteBehavior = DeleteBehavior.Cascade;
             }
         }
 

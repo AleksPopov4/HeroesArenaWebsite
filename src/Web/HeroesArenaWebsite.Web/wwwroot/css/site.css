@@ -417,6 +417,12 @@ body {
     align-items: center;
 }
 
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .forumTitle {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
@@ -531,16 +537,18 @@ body {
 
 h1 {
     color: #ffffff;
-    font-family: 'Raleway',sans-serif;
+    font-family: 'Raleway', sans-serif;
     font-size: 62px;
     font-weight: 800;
     line-height: 72px;
     margin: 0 0 24px;
     text-align: center;
     text-transform: uppercase;
+    background-color: #192620; /*rgba(0, 116, 238, 1);
+}*/
 }
 
-.isAdmin {
+    .isAdmin {
     display: inline-block;
     padding: 3px;
     background-color: #FFEB3B;
@@ -557,4 +565,92 @@ h1 {
     padding: 24px;
     margin: auto;
     border-bottom: 1px solid #335;
+}
+
+.featured-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.featured-bg {
+    width: calc(50% - 156px);
+    float: left;
+    height: 100%;
+    left: 0;
+    right: 0;
+    position: absolute;
+}
+
+.featured-box {
+    display: inline-block;
+    float: right;
+    width: calc(50% ); /*+ 156px*/
+    background: #007cba;
+    padding: 20px 10px 26px 16px;
+    border-style: solid
+}
+
+.featured-box-mage {
+    display: inline-block;
+    float: left;
+    width: calc(50% ); /*+ 156px*/
+    background: #007cba;
+    padding: 20px 10px 26px 16px;
+    border-style: solid
+}
+
+.featured-box .text-box {
+    max-width: 810px;
+}
+
+.featured-box .text-box h3 {
+    font-size: 60px;
+    max-width: 100%;
+}
+
+.featured-box .text-box p {
+    font-size: 16px;
+}
+
+
+.set-bg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
+
+div.image-warrior {
+    content: url('../img/warrior.png');
+    display: inline;
+    float: left;
+}
+
+div.image-mage {
+    content: url('../img/mage.png');
+    display: inline;
+    float: right;
+}
+div.image-archer {
+    content: url('../img/archer.png');
+    display: inline;
+    float: left;
+}
+
+h2 {
+    color: #ffffff;
+    font-family: 'Raleway',sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 36px;
+    margin: 0 0 24px;
+    text-align: center;
+}
+
+p {
+    color: #f8f8f8;
+    font-family: 'Raleway',sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 32px;
+    margin: 0 0 24px;
 }

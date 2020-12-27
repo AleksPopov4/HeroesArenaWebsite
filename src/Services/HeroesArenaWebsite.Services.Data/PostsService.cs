@@ -52,6 +52,11 @@ namespace HeroesArenaWebsite.Services.Data
 
         public IEnumerable<Post> GetFilteredPosts(string searchQuery)
         {
+            if (searchQuery is null)
+            {
+                return new List<Post>();
+            }
+
             var searchQueryToLower = searchQuery.ToLower();
 
             return this.postsRepository.All()

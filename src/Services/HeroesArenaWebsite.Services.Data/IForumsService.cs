@@ -26,7 +26,7 @@ namespace HeroesArenaWebsite.Services.Data
 
         //Task Create(Forum forum);
 
-        Task Delete(int id);
+        Task DeleteAsync(int id);
 
         Task SetForumImage(int id, Uri uri);
 

@@ -132,6 +132,15 @@ namespace HeroesArenaWebsite.Web.Controllers
 
         [HttpPost]
         [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.forumsService.DeleteAsync(id);
+
+            return this.RedirectToAction("Index", "Forums");
+        }
+
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddForum(AddForumInputModel model)
         {
             string imageUri;

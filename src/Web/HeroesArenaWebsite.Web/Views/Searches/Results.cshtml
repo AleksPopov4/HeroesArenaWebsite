@@ -7,8 +7,8 @@
             <form asp-controller="Searches" asp-action="Search" method="post">
                 <div class="searchForm">
                     <input asp-for="SearchQuery" type="text" placeholder="Search all forums..." class="searchBar" onfocus="clearThis(this)">
-                    <button type="submit" class="btn buttonSearch">
-                        <i class="material-icons">Submit search</i>
+                    <button type="submit" class="btn btn-newPost">
+                        Submit search
                     </button>
                 </div>
             </form>
@@ -62,15 +62,13 @@
                 </tbody>
             </table>
         }
-        else if (@Model.EmptySearchResults)
+        else if (@Model.EmptySearchResults || @Model.SearchQuery == null)
         {
             <div class="noPosts">
-                <i class="material-icons md-72">question_answer</i>
                 <h3>
                     No results found for @Model.SearchQuery! <br />
                 </h3>
             </div>
-
         }
     </div>
 </div>
