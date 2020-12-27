@@ -6,7 +6,7 @@
         <div class="sectionHeading noBorder">
             User Profile
         </div>
-        @if (User.IsInRole("Admin"))
+        @if (User.IsInRole("Administrator"))
         {
             <form method="post" asp-controller="Profiles" asp-action="Deactivate" asp-route-id="@Model.UserId">
                 <div>
