@@ -8,11 +8,18 @@
         </div>
         @if (User.IsInRole("Administrator"))
         {
-            <form method="post" asp-controller="Profiles" asp-action="Deactivate" asp-route-id="@Model.UserId">
+            <div style="width: 400px; margin: 0 auto;">
                 <div>
-                    <button class="btn btn-danger" active="@Model.IsActive">Deactivate User</button>
+                    <form method="post"
+                          asp-action="Deactivate">
+
+                    <div asp-validation-summary="All" class="error"></div>
+
+                    <input type="hidden" asp-for="@Model.UserId" />
+                    </form>
+                        @*<a asp-controller="Profiles" asp-action="Deactivate" asp-route-id="@Model.UserId" onclick="return confirm('Are you sure you want to deactivate?')" class="btn btn-newPost">Deactivate User</a>*@
                 </div>
-            </form>
+            </div>
         }
     </div>
     @if (Context.User.Identity.IsAuthenticated)
@@ -22,14 +29,14 @@
                 <div id="userProfileImage" style="background-image: url(@Model.ProfileImageUrl); background-size:100%;"></div>
                 <br />
                 <br />
-                <label>Upload a new profile picture</label>
+                <h3><label>Profile picture</label></h3>
                 <br />
                 @if (Context.User.Identity.Name == Model.Username)
                 {
                     <form method="post" enctype="multipart/form-data" asp-controller="Profiles" asp-action="UploadProfileImage">
                         <div id="upload">
                             <label class="btn btn-default btn-file">
-                                Browse <input type="file" name="file" style="display: none;">
+                                Upload new profile image <input type="file" name="file" style="display: none;">
                             </label>
                         </div>
                         <button type="submit" id="btn-profile" class="btn-submitPost">Submit</button>

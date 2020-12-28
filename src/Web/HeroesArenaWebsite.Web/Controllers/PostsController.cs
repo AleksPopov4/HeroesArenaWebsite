@@ -42,7 +42,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                 AuthorRating = reply.User.Rating,
                 CreatedOn = reply.CreatedOn,
                 ReplyContent = reply.Content,
-                IsAuthorAdmin = this.User.IsInRole("Administrator"),
+                IsAuthorAdmin = this.userManager.GetRolesAsync(reply.User).Result.Contains("Administrator"),
             }).OrderBy(reply => reply.CreatedOn);
 
             var model = new PostIndexViewModel
@@ -57,7 +57,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                PostContent = post.Content,
                ForumId = post.Forum.Id,
                ForumName = post.Forum.Title,
-               IsAuthorAdmin = this.User.IsInRole("Administrator"),
+               IsAuthorAdmin = this.userManager.GetRolesAsync(post.User).Result.Contains("Administrator"),
                Replies = replies,
             };
 

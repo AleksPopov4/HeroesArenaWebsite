@@ -91,6 +91,7 @@ namespace HeroesArenaWebsite.Web.Controllers
             return this.RedirectToAction("Detail", "Profiles", new { id = userId });
         }
 
+        [HttpGet]
         [Authorize]
         public IActionResult Deactivate(string userId)
         {

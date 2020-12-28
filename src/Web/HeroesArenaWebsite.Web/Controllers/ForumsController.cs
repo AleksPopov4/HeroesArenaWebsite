@@ -130,7 +130,7 @@ namespace HeroesArenaWebsite.Web.Controllers
             return this.View(model);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
