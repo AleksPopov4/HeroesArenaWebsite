@@ -93,10 +93,11 @@ namespace HeroesArenaWebsite.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult Deactivate(string userId)
+        [Route("Profiles/Deactivate/{userId:Guid}")]
+        public async Task<IActionResult> Deactivate(string userId)
         {
             var user = this.usersService.GetById(userId);
-            this.usersService.Deactivate(user);
+            await this.usersService.Deactivate(user);
 
             return this.RedirectToAction("Index", "Profiles");
         }

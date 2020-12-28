@@ -9,16 +9,7 @@
         @if (User.IsInRole("Administrator"))
         {
             <div style="width: 400px; margin: 0 auto;">
-                <div>
-                    <form method="post"
-                          asp-action="Deactivate">
-
-                    <div asp-validation-summary="All" class="error"></div>
-
-                    <input type="hidden" asp-for="@Model.UserId" />
-                    </form>
-                        @*<a asp-controller="Profiles" asp-action="Deactivate" asp-route-id="@Model.UserId" onclick="return confirm('Are you sure you want to deactivate?')" class="btn btn-newPost">Deactivate User</a>*@
-                </div>
+                  <a asp-controller="Profiles" asp-action="Deactivate" asp-route-id="@Model.UserId" onclick="return confirm('Are you sure you want to deactivate?')" class="btn btn-newPost">Deactivate User</a>
             </div>
         }
     </div>
