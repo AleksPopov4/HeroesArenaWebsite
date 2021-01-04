@@ -17,6 +17,7 @@
                     <span><a asp-controller="PostReplies" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">Post Reply</a></span>
                 </div>
             }
+
         </div>
     </div>
 
@@ -36,6 +37,12 @@
         <div class="col-md-9 postContentContainer">
             <div class="postContent">
                 @Html.Raw(@Model.PostContent)
+                @if (Context.User.Identity.IsAuthenticated)
+                {
+                    <div class="btn-holder">
+                        <a asp-controller="Posts" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-deletePost">Delete Post</a>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -60,6 +67,12 @@
                 <div class="col-md-9 replyContentContainer">
                     <div class="postContent">
                         @Html.Raw(@reply.ReplyContent)
+                        @*@if (Context.User.Identity.IsAuthenticated)
+                            {
+                                <div>
+                                    <span><a asp-controller="PostReplies" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">Post Reply</a></span>
+                                </div>
+                            }*@
                     </div>
                 </div>
             </div>

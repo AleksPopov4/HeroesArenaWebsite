@@ -36,9 +36,9 @@ namespace HeroesArenaWebsite.Web.Controllers
             var replies = post.Replies.Select(reply => new PostReplyViewModel
             {
                 Id = reply.Id,
-                AuthorId = reply.User?.Id,
-                AuthorName = reply.User?.UserName,
-                AuthorImageUrl = reply.User?.ProfileImageUrl,
+                AuthorId = reply.User.Id,
+                AuthorName = reply.User.UserName,
+                AuthorImageUrl = reply.User.ProfileImageUrl,
                 AuthorRating = reply.User.Rating,
                 CreatedOn = reply.CreatedOn,
                 ReplyContent = reply.Content,
@@ -141,7 +141,7 @@ namespace HeroesArenaWebsite.Web.Controllers
             var post = this.postsService.GetById(id);
             this.postsService.Delete(id);
 
-            return this.RedirectToAction("Index", "Forums", new {id = post.Forum.Id});
+            return this.RedirectToAction("Index", "Forums", new { id = post.Forum.Id });
         }
 
         public bool IsAuthorAdmin(ApplicationUser user)

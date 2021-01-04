@@ -68,12 +68,11 @@ namespace HeroesArenaWebsite.Web
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
-
-            services.AddScoped<IForumsService, ForumsService>();
-            services.AddScoped<IPostsService, PostsService>();
-            services.AddScoped<IPostRepliesService, PostRepliesService>();
-            services.AddScoped<IApplicationUsersService, ApplicationUsersService>();
-            services.AddScoped<IUploadService, UploadService>();
+            services.AddTransient<IForumsService, ForumsService>();
+            services.AddTransient<IPostsService, PostsService>();
+            services.AddTransient<IPostRepliesService, PostRepliesService>();
+            services.AddTransient<IApplicationUsersService, ApplicationUsersService>();
+            services.AddTransient<IUploadService, UploadService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

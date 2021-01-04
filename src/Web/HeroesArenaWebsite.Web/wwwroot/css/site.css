@@ -334,6 +334,21 @@ body {
         transition: ease-in 0.1s;
     }
 
+.btn-deletePost {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color:firebrick !important;
+    color: #fff !important;
+    transition: ease-in 0.1s;
+    border-radius: 0px !important;
+}
+
+    .btn-deletePost:hover {
+        background-color:indianred !important;
+        transition: ease-in 0.1s;
+    }
+
 #replyRow {
     margin-left: 16px;
 }
@@ -635,6 +650,15 @@ div.image-archer {
     display: inline;
     float: left;
 }
+
+div.postContent {
+    position: relative;
+}
+
+div.postContent .btn-holder {
+        justify-content: flex-end;
+        display: flex;
+    }
 
 h2 {
     color: #ffffff;
