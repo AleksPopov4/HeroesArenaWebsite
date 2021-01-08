@@ -132,6 +132,7 @@ body {
 
 .sectionDescription {
     color: #EEE;
+    /*background-color: #115599;*/
 }
 
 .frontPageHeading {
@@ -483,6 +484,11 @@ body {
     background-color: white;
 }
 
+#postIndexContent {
+    padding-bottom: 60px;
+    background-color: white;
+}
+
 .noPosts {
     text-align: left;
     padding-top: 30px;
@@ -521,6 +527,7 @@ body {
 .createPostSection {
     background-color: #fff;
     padding: 24px;
+    margin: auto
 }
 
 /*createa Forum*/

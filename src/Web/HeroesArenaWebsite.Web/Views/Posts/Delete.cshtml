@@ -1,19 +1,32 @@
-﻿@model HeroesArenaWebsite.Web.ViewModels.Post.DeletePostModel
+﻿@*@model HeroesArenaWebsite.Web.ViewModels.Post.DeletePostModel*@
 
-<div class="container body-content">
-    @if (!Context.User.Identity.IsAuthenticated)
-    {
+    <div class="container body-content">
+        @*@if (!Context.User.Identity.IsAuthenticated)*@
+        {
         <div class="row sectionHeader">
             <div class="sectionHeading">Delete Post</div>
-            <div class="sectionDescription">
-                <p>
-                    Are you sure you'd like to delete this post?
-                </p>
-            </div>
         </div>
-        <div class="deletePost">
+        <div class="sectionDescription">
+            <p>
+                Are you sure you'd like to delete this post?
+            </p>
+        </div>
+
+        @*<div class="col-md-3 postAuthorContainer">
+            <div class="postAuthorImage" style="background-image: url(@Model.AuthorImageUrl); background-size: 100%;"></div>
+            <a asp-controller="Profiles" asp-action="Detail" asp-route-id="@Model.AuthorId">
+                <strong>@Model.AuthorName</strong>
+            </a> (<span class="postAuthorRating">@Model.AuthorRating</span>) <br />
+            <span class="postDate">@Model.CreatedOn</span>..
+            @if (@Model.IsAuthorAdmin)
+            {
+                <span class="isAdmin smaller">Admin</span>
+            }
+        </div>*@
+
+        @*<div class="deletePost">
             <button id="deleteButton" class="btn btn-lg btn-danger">Confirm Delete</button>
             <button id="deleteButton" class="btn btn-lg btn-default">Cancel</button>
-        </div>
-    }
-</div>
+        </div>*@
+        }
+    </div>

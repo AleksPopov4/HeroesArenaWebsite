@@ -7,5 +7,7 @@
         public string PostAuthor { get; set; }
 
         public string PostContent { get; set; }
+
+        public string AuthorImageUrl { get; set; }
     }
 }
