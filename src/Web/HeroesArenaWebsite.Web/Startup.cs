@@ -115,37 +115,29 @@ namespace HeroesArenaWebsite.Web
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
-            this.CreateRoles(serviceProvider);
+
+            this.CreateAdmin(serviceProvider);
         }
 
-        private void CreateRoles(IServiceProvider serviceProvider)
+        private void CreateAdmin(IServiceProvider serviceProvider)
         {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            Task<IdentityResult> roleResult;
-            string email = "popov.aleks@yahoo.com";
-
-            //Check that there is an Administrator role and create if not
-            Task<bool> hasAdminRole = roleManager.RoleExistsAsync("Administrator");
-            hasAdminRole.Wait();
-
-            if (!hasAdminRole.Result)
-            {
-                roleResult = roleManager.CreateAsync(new ApplicationRole("Administrator"));
-                roleResult.Wait();
-            }
 
             //Check if the admin user exists and create it if not
             //Add to the Administrator role
 
-            Task<ApplicationUser> testUser = userManager.FindByEmailAsync(email);
+            Task<ApplicationUser> testUser = userManager.FindByEmailAsync(this.configuration.GetValue<string>("AdminData:E-mail"));
             testUser.Wait();
 
             if (testUser.Result == null)
             {
-                ApplicationUser administrator = new ApplicationUser { Email = "popov.aleks@yahoo.com", UserName = "popov.aleks@yahoo.com" };
+                ApplicationUser administrator = new ApplicationUser
+                {
+                    Email = this.configuration.GetValue<string>("AdminData:E-mail"),
+                    UserName = this.configuration.GetValue<string>("AdminData:Username"),
+                };
 
-                Task<IdentityResult> newUser = userManager.CreateAsync(administrator, "adminadmin");
+                Task<IdentityResult> newUser = userManager.CreateAsync(administrator, this.configuration.GetValue<string>("AdminData:Password"));
                 newUser.Wait();
 
                 if (newUser.Result.Succeeded)

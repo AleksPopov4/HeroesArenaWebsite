@@ -17,6 +17,32 @@
             var roleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
 
             await SeedRoleAsync(roleManager, GlobalConstants.AdministratorRoleName);
+
+            //, string adminEmail, string adminUsername, string adminPassword
+
+            ////Check if the admin user exists and create it if not
+            ////Add to the Administrator role
+
+            //Task<ApplicationUser> testUser = userManager.FindByEmailAsync(adminEmail);
+            //testUser.Wait();
+
+            //if (testUser.Result == null)
+            //{
+            //    ApplicationUser administrator = new ApplicationUser
+            //    {
+            //        Email = adminEmail,
+            //        UserName = adminUsername,
+            //    };
+
+            //    Task<IdentityResult> newUser = userManager.CreateAsync(administrator, adminPassword);
+            //    newUser.Wait();
+
+            //    if (newUser.Result.Succeeded)
+            //    {
+            //        Task<IdentityResult> newUserRole = userManager.AddToRoleAsync(administrator, "Administrator");
+            //        newUserRole.Wait();
+            //    }
+            //}
         }
 
         private static async Task SeedRoleAsync(RoleManager<ApplicationRole> roleManager, string roleName)
