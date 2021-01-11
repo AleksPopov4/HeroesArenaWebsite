@@ -25,7 +25,7 @@ namespace HeroesArenaWebsite.Services.Data
 
         Task Archive(int id);
 
-        Task Delete(int id);
+        Task DeleteAsync(int id);
 
         Task EditPost(int id, string newContent);
 

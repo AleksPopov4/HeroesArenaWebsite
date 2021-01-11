@@ -362,12 +362,22 @@ body {
 
 .btn-file {
     color: white;
-    width: 100%;
     background-color: #4fc3f7;
     transition: ease-in 0.3s;
 }
 
     .btn-file:hover {
+        background-color: #039be5;
+        transition: ease-in 0.3s;
+    }
+
+.btn-default {
+    color: white;
+    background-color: #4fc3f7;
+    transition: ease-in 0.3s;
+}
+
+    .btn-default:hover {
         background-color: #039be5;
         transition: ease-in 0.3s;
     }
@@ -403,6 +413,18 @@ body {
     border: none;
     padding: 0 !important;
     font: inherit;
+}
+
+.btn-file {
+    color: white;
+    width: 100%;
+    background-color: #4fc3f7;
+    transition: ease-in 0.3s;
+}
+
+.btn-file:hover {
+    background-color: #039be5;
+    transition: ease-in 0.3s;
 }
 
 .buttonSearch {

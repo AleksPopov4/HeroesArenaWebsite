@@ -101,7 +101,7 @@ namespace HeroesArenaWebsite.Services.Data
 
         public async Task DeleteAsync(int id)
         {
-            var forum = this.forumsRepository.All().FirstOrDefault(x => x.Id == id);
+            var forum = this.GetById(id);
             this.forumsRepository.Delete(forum);
 
             await this.forumsRepository.SaveChangesAsync();

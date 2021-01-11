@@ -115,7 +115,7 @@ namespace HeroesArenaWebsite.Services.Data
             await this.postsRepository.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var post = this.GetById(id);
             this.postsRepository.Delete(post);

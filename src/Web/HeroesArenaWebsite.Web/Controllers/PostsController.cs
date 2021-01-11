@@ -124,22 +124,29 @@ namespace HeroesArenaWebsite.Web.Controllers
         public IActionResult Delete(int id)
         {
             var post = this.postsService.GetById(id);
-            var model = new DeletePostModel
+            var model = new DeletePostViewModel
             {
+                ForumId = post.Forum.Id,
                 PostId = post.Id,
                 PostAuthor = post.User.UserName,
                 PostContent = post.Content,
+                AuthorId = post.User.Id,
+                AuthorName = post.User.UserName,
+                AuthorImageUrl = post.User.ProfileImageUrl,
+                AuthorRating = post.User.Rating,
+                CreatedOn = post.CreatedOn,
+                IsAuthorAdmin = this.userManager.GetRolesAsync(post.User).Result.Contains("Administrator"),
             };
 
-            return this.View(model);
+            return this.View(model); 
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize]
-        public IActionResult ConfirmDelete(int id)
+        public async Task<IActionResult> ConfirmDelete(int id)
         {
             var post = this.postsService.GetById(id);
-            this.postsService.Delete(id);
+            await this.postsService.DeleteAsync(id);
 
             return this.RedirectToAction("Index", "Forums", new { id = post.Forum.Id });
         }

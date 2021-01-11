@@ -430,7 +430,7 @@ namespace HeroesArenaWebsite.Data.Migrations
                     b.HasOne("HeroesArenaWebsite.Data.Models.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -457,7 +457,7 @@ namespace HeroesArenaWebsite.Data.Migrations
                     b.HasOne("HeroesArenaWebsite.Data.Models.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HeroesArenaWebsite.Data.Models.ApplicationUser", null)
@@ -472,7 +472,7 @@ namespace HeroesArenaWebsite.Data.Migrations
                     b.HasOne("HeroesArenaWebsite.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

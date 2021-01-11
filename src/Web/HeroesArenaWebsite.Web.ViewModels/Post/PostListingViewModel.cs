@@ -1,5 +1,4 @@
-﻿using System;
-using HeroesArenaWebsite.Web.ViewModels.Forum;
+﻿using HeroesArenaWebsite.Web.ViewModels.Forum;
 
 namespace HeroesArenaWebsite.Web.ViewModels.Post
 {
