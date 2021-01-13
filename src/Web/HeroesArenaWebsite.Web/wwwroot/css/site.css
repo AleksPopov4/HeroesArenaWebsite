@@ -488,7 +488,7 @@ body {
     border: 1px solid #555;
     background-size: 100%
 }
-
+dexContent
 .forumPostCount {
     color: #888;
     font-family: 'Roboto Mono';
@@ -502,11 +502,6 @@ body {
 }
 
 #forumIndexContent {
-    padding-bottom: 60px;
-    background-color: white;
-}
-
-#postIndexContent {
     padding-bottom: 60px;
     background-color: white;
 }

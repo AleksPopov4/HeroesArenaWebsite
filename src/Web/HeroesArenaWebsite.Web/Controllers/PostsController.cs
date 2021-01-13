@@ -112,12 +112,24 @@ namespace HeroesArenaWebsite.Web.Controllers
 
             var model = new CreatePostInputModel
             {
+                Id = post.Id,
                 Title = post.Title,
                 Content = post.Content,
                 CreatedOn = post.CreatedOn,
             };
 
             return this.View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> EditPost(CreatePostInputModel model)
+        {
+            await this.postsService.EditPost(model.Id, model.Content);
+
+            //var post = this.postsService.GetById(model.Id);
+
+            return this.RedirectToAction("Index", "Posts", new { id = model.Id });
         }
 
         [Authorize]
@@ -138,7 +150,7 @@ namespace HeroesArenaWebsite.Web.Controllers
                 IsAuthorAdmin = this.userManager.GetRolesAsync(post.User).Result.Contains("Administrator"),
             };
 
-            return this.View(model); 
+            return this.View(model);
         }
 
         [HttpGet]
