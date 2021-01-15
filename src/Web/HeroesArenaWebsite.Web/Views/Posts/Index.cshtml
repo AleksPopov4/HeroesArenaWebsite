@@ -37,14 +37,19 @@
         <div class="col-md-9 postContentContainer">
             <div class="postContent">
                 @Html.Raw(@Model.PostContent)
-                @if (Context.User.Identity.IsAuthenticated)
-                {
-                <div class="btn-holder">
-                    <div><a asp-controller="Posts" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-deletePost">Delete Post</a></div>
-                    <div><a asp-controller="Posts" asp-action="Edit" asp-route-id="@Model.Id" >Edit Post</a></div>
-                </div>
-                }   
             </div>
+            @if (Context.User.Identity.IsAuthenticated)
+            {
+        <div class="btn-holder">
+            <div style="text-align: right">
+                <a asp-controller="Posts" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-newReply">Edit Post</a>
+            </div>
+            <br />
+            <div style="text-align: right">
+                <a asp-controller="Posts" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-deletePost">Delete Post</a>
+            </div>
+        </div>
+            }
         </div>
     </div>
 
