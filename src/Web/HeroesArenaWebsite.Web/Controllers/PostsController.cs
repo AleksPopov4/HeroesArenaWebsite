@@ -106,11 +106,11 @@ namespace HeroesArenaWebsite.Web.Controllers
         }
 
         [Authorize]
-        public IActionResult Edit(int postId)
+        public IActionResult Edit(int id)
         {
-            var post = this.postsService.GetById(postId);
+            var post = this.postsService.GetById(id);
 
-            var model = new CreatePostInputModel
+            var model = new EditPostInputModel
             {
                 Id = post.Id,
                 Title = post.Title,
@@ -121,11 +121,11 @@ namespace HeroesArenaWebsite.Web.Controllers
             return this.View(model);
         }
 
-        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> EditPost(CreatePostInputModel model)
+        [Authorize]
+        public async Task<IActionResult> EditPost(EditPostInputModel model)
         {
-            await this.postsService.EditPost(model.Id, model.Content);
+            await this.postsService.EditPost(model.Id, model.Title, model.Content);
 
             //var post = this.postsService.GetById(model.Id);
 

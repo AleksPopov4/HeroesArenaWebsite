@@ -27,7 +27,7 @@ namespace HeroesArenaWebsite.Services.Data
 
         Task DeleteAsync(int id);
 
-        Task EditPost(int id, string newContent);
+        Task EditPost(int id, string newTitle, string newContent);
 
         string GetForumImageUrl(int id);
     }

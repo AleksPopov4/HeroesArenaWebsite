@@ -123,9 +123,10 @@ namespace HeroesArenaWebsite.Services.Data
             await this.postsRepository.SaveChangesAsync();
         }
 
-        public async Task EditPost(int id, string newContent)
+        public async Task EditPost(int id, string newTitle, string newContent)
         {
             var post = this.GetById(id);
+            post.Title = newTitle;
             post.Content = newContent;
             this.postsRepository.Update(post);
 

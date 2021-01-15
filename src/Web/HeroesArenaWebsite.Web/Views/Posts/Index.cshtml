@@ -7,17 +7,16 @@
                 @Model.Title
             </span>
             <br /><br />
-            <span id="headingBackBtn">
-                <a asp-controller="Forums" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-back">Back to @Model.ForumName</a>
-            </span>
-            <br /><br />
             @if (Context.User.Identity.IsAuthenticated)
             {
                 <div class="row" id="replyRow">
                     <span><a asp-controller="PostReplies" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">Post Reply</a></span>
                 </div>
             }
-
+            <br /><br />
+            <span id="headingBackBtn">
+                <a asp-controller="Forums" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-back">Back to @Model.ForumName</a>
+            </span>
         </div>
     </div>
 

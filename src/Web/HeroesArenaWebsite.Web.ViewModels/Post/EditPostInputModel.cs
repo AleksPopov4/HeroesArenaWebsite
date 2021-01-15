@@ -13,10 +13,6 @@ namespace HeroesArenaWebsite.Web.ViewModels.Post
 
         public string ForumName { get; set; }
 
-        public string ForumImageUrl { get; set; }
-
-        public int ForumId { get; set; }
-
         [Required]
         [MaxLength(500)]
         public string Content { get; set; }
@@ -25,6 +21,5 @@ namespace HeroesArenaWebsite.Web.ViewModels.Post
 
         public string UserId { get; set; }
 
-        public string AuthorName { get; set; }
     }
 }
