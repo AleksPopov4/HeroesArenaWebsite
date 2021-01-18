@@ -17,8 +17,9 @@ I am currently working on expanding admin and post functionality, unit tests and
 - Azure Blob Storage
 - MS SQL Server
 
-#Screenshots
-
+# :camera: Screenshots
+<a href="https://imgur.com/Kd6LyMR"><img src="https://i.imgur.com/Kd6LyMR.png" title="source: imgur.com" /></a>
+<a href="https://imgur.com/r2r8HRJ"><img src="https://i.imgur.com/r2r8HRJ.png" title="source: imgur.com" /></a>
 
 # Template authors
 This project uses the ASP.NET-MVC-Template by:
