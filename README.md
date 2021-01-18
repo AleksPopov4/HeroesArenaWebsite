@@ -1,4 +1,4 @@
-# Overview
+# :orange_book: Overview
 
 A website for a video game built using ASP.NET Core MVC. It consists of a home page, a forum section and a privacy page.
 The home page consists of an embedded youtube video(the game's trailer) followed by the game's characters and a short description for each one.
@@ -9,14 +9,15 @@ Admin users are able to create and delete forum topics, create and delete posts,
 
 I am currently working on expanding admin and post functionality, unit tests and deploying the project to Azure.
 
-
-# Used technologies
+# :hammer_and_wrench: Used technologies
 
 - ASP.NET Core 3.1 MVC
 - Entity Framework Core
 - Bootstrap
 - Azure Blob Storage
 - MS SQL Server
+
+#Screenshots
 
 
 # Template authors
