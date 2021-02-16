@@ -37,7 +37,7 @@
             <div class="postContent">
                 @Html.Raw(@Model.PostContent)
             </div>
-            @if (Context.User.Identity.IsAuthenticated)
+            @if (Context.User.Identity.IsAuthenticated && Context.User.Identity.Name == @Model.AuthorName)
             {
                 <div class="btn-holder">
                     <div style="text-align: right">
@@ -79,15 +79,15 @@
                                 </div>
                             }*@
                     </div>
-                    @if (Context.User.Identity.IsAuthenticated)
+                    @if (Context.User.Identity.IsAuthenticated && Context.User.Identity.Name == reply.AuthorName)
                     {
                         <div class="btn-holder">
                             <div style="text-align: right">
-                                <a asp-controller="PostReplies" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-newReply">Edit Post</a>
+                                <a asp-controller="PostReplies" asp-action="Edit" asp-route-id="@reply.Id" class="btn btn-newReply">Edit Post</a>
                             </div>
                             <br />
                             <div style="text-align: right">
-                                <a asp-controller="PostRepliess" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-deletePost">Delete Post</a>
+                                <a asp-controller="PostReplies" asp-action="Delete" asp-route-id="@reply.Id" class="btn btn-deletePost">Delete Post</a>
                             </div>
                         </div>
                     }
