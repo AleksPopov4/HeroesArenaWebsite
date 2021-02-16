@@ -1,4 +1,4 @@
-﻿namespace HeroesArenaWebsite.Data.Repositories
+﻿ namespace HeroesArenaWebsite.Data.Repositories
 {
     using System;
     using System.Linq;

@@ -5,6 +5,7 @@ using HeroesArenaWebsite.Data.Models;
 using HeroesArenaWebsite.Data.Models.Forum;
 using HeroesArenaWebsite.Services.Data;
 using HeroesArenaWebsite.Web.ViewModels;
+using HeroesArenaWebsite.Web.ViewModels.Post;
 using HeroesArenaWebsite.Web.ViewModels.Reply;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -73,9 +74,33 @@ namespace HeroesArenaWebsite.Web.Controllers
             };
 
             await this.postsService.AddReply(reply);
-            //await this.userService.
 
             return this.RedirectToAction("Index", "Posts", new { id = model.PostId });
+        }
+
+        [Authorize]
+        public IActionResult Edit(int id)
+        {
+            var post = this.postsService.GetById(id);
+
+            var model = new EditPostInputModel
+            {
+                Id = post.Id,
+                Title = post.Title,
+                Content = post.Content,
+                CreatedOn = post.CreatedOn,
+            };
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EditPost(EditPostInputModel model)
+        {
+            await this.postsService.EditPost(model.Id, model.Title, model.Content);
+
+            return this.RedirectToAction("Index", "Posts", new { id = model.Id });
         }
     }
 }

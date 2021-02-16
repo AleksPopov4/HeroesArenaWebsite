@@ -1,0 +1,33 @@
+﻿@model HeroesArenaWebsite.Web.ViewModels.Post.EditPostInputModel
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading noBorder">
+            Edit Post | @Model.Title
+            @*<div class="forumLogo" style="background-image: url(@Model.ForumImageUrl); background-size:100%"></div>*@
+            <span id="headingBtn"><a asp-controller="Posts" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-back">Back to @Model.ForumName</a></span>
+        </div>
+    </div>
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        <div class="row" id="forumIndexContent">
+            <div class="createForumSection">
+                <form asp-action="EditPost" method="post" id="addPostForm">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Title"></label>
+                        <input asp-for="Title" class="form-control" placeholder="Enter your new title here." />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Content">Post Content</label>
+                        <textarea asp-for="Content" rows="10" class="form-control" placeholder="Edit your post here."></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+                    <button type="submit" id="registerBtn" class="btn btn-submitPost">Submit changes</button>
+                    <input asp-for="Id" type="hidden" />
+                </form>
+            </div>
+        </div>
+    }
+</div>
